@@ -1,0 +1,24 @@
+{
+  "name": "vraiufo",
+  "version": "1.0.0",
+  "description": "Vrai ou faux UFO ?",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "squirrelly": "^8.0.1",
+    "fastify": "^2.14.1",
+    "fastify-accepts": "^1.0.0",
+    "fastify-caching": "^5.0.0",
+    "fastify-static": "^2.7.0",
+    "pg": "^8.2.1"
+  },
+  "keywords": [
+    "ufo",
+    "vrai",
+    "faux"
+  ],
+  "author": "Jérôme Beau",
+  "license": "ISC"
+}

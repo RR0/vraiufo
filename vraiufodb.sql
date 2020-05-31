@@ -16,7 +16,10 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE ONLY en.ufo DROP CONSTRAINT ufo_pk;
+ALTER TABLE ONLY fr.ufo
+    DROP CONSTRAINT ufo_pk;
+ALTER TABLE ONLY en.ufo
+    DROP CONSTRAINT ufo_pk;
 DROP TABLE fr.ufo;
 DROP TABLE en.ufo;
 DROP SCHEMA fr;
@@ -54,10 +57,13 @@ SET default_table_access_method = heap;
 -- Name: ufo; Type: TABLE; Schema: en; Owner: javarome
 --
 
-CREATE TABLE en.ufo (
-    id uuid NOT NULL,
-    title text,
-    media_url character varying(1024)
+CREATE TABLE en.ufo
+(
+    id          uuid NOT NULL,
+    assertion   text,
+    media_url   character varying(1024),
+    answer      boolean,
+    explanation text
 );
 
 
@@ -69,9 +75,11 @@ ALTER TABLE en.ufo OWNER TO javarome;
 
 CREATE TABLE fr.ufo
 (
-    id        uuid NOT NULL,
-    title     text,
-    media_url character varying(1024)
+    id          uuid NOT NULL,
+    assertion   text,
+    media_url   character varying(1024),
+    answer      boolean,
+    explanation text
 );
 
 
@@ -82,9 +90,9 @@ ALTER TABLE fr.ufo
 -- Data for Name: ufo; Type: TABLE DATA; Schema: en; Owner: javarome
 --
 
-COPY en.ufo (id, assertion, media_url) FROM stdin;
-90722ad3-8a0a-48ad-bd04-46408dc3ad62	The Roswell autopsy	https://rr0.org/science/crypto/ufo/enquete/dossier/Roswell/Films/2006_Warner.jpg
-a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	The Roswell crash	https://rr0.org/time/1/9/4/7/07/08/Times.gif
+COPY en.ufo (id, assertion, media_url, answer, explanation) FROM stdin;
+90722ad3-8a0a-48ad-bd04-46408dc3ad62	The Roswell autopsy	https://rr0.org/science/crypto/ufo/enquete/dossier/Roswell/Films/2006_Warner.jpg	\N	\N
+a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	The Roswell crash	https://rr0.org/time/1/9/4/7/07/08/Times.gif	\N	\N
 \.
 
 
@@ -92,9 +100,9 @@ a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	The Roswell crash	https://rr0.org/time/1/9/
 -- Data for Name: ufo; Type: TABLE DATA; Schema: fr; Owner: javarome
 --
 
-COPY fr.ufo (id, assertion, media_url) FROM stdin;
-a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	Le crash de Roswell	https://rr0.org/time/1/9/4/7/07/08/Times.gif
-90722ad3-8a0a-48ad-bd04-46408dc3ad62	L'autopsie de Roswell	https://rr0.org/science/crypto/ufo/enquete/dossier/Roswell/Films/2006_Warner.jpg
+COPY fr.ufo (id, assertion, media_url, answer, explanation) FROM stdin;
+a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	Le crash de Roswell	https://rr0.org/time/1/9/4/7/07/08/Times.gif	\N	\N
+90722ad3-8a0a-48ad-bd04-46408dc3ad62	L'autopsie de Roswell	https://rr0.org/science/crypto/ufo/enquete/dossier/Roswell/Films/2006_Warner.jpg	\N	\N
 \.
 
 
@@ -104,6 +112,14 @@ a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	Le crash de Roswell	https://rr0.org/time/1/
 
 ALTER TABLE ONLY en.ufo
     ADD CONSTRAINT ufo_pk PRIMARY KEY (id);
+
+
+--
+-- Name: ufo ufo_pk; Type: CONSTRAINT; Schema: fr; Owner: javarome
+--
+
+ALTER TABLE ONLY fr.ufo
+    ADD CONSTRAINT ufo_pk UNIQUE (id);
 
 
 --

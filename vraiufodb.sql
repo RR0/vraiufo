@@ -67,10 +67,11 @@ ALTER TABLE en.ufo OWNER TO javarome;
 -- Name: ufo; Type: TABLE; Schema: fr; Owner: javarome
 --
 
-CREATE TABLE fr.ufo (
-                        id        uuid NOT NULL,
-                        title     text,
-                        media_url character varying(1024)
+CREATE TABLE fr.ufo
+(
+    id        uuid NOT NULL,
+    title     text,
+    media_url character varying(1024)
 );
 
 

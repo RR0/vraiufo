@@ -17,8 +17,7 @@ export class VraiUFO {
     <button onclick="vraiUFO.answer(false)">Faux</button>
   </form>
 `;
-          content = Sqrl.load(template, content)
-          console.log(content)
+          content = Sqrl.render(template, content)
           questionElem.innerHTML = content
           return content;
         })

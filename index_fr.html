@@ -3,15 +3,31 @@
 <head>
   <title>Vraiufo</title>
   <link href="public/index.css" rel="stylesheet"/>
+  <link href="public/title.css" rel="stylesheet"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
-<h1>{{it.title}}</h1>
-<img alt="image" src="{{it.media_url}}"/>
-<form action="submit">
-  <button id="true">Vrai</button>
-  ou
-  <button id="false">Faux</button>
-</form>
+<h1 class="title" onclick="answer()">
+  <span class="vrai">vrai</span><span class="ou">u</span><span class="f">f</span><span class="o">o</span><span
+    class="aux">aux</span><span class="qm">?</span>
+</h1>
+<div id="question">
+  <h2>{{it.assertion}}</h2>
+  <img alt="image" src="{{it.media_url}}"/>
+  <form action="javascript:vraiUFO.answer()">
+    <button onclick="vraiUFO.answer(true)">Vrai</button>
+    ou
+    <button onclick="vraiUFO.answer(false)">Faux</button>
+  </form>
+</div>
 </body>
+<script src="https://unpkg.com/squirrelly@8.0.1"></script>
+<script type="module">
+  import {vraiUFO} from './public/index.js'
+
+  window.vraiUFO = vraiUFO;
+</script>
+<script nomodule>
+  alert("This website requires a modern browser")
+</script>
 </html>

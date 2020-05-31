@@ -1,0 +1,212 @@
+.title {
+    text-align: center;
+    font-size: 3em;
+    font-family: monospace, sans-serif;
+    height: 2em;
+    vertical-align: top;
+}
+
+.title span {
+    display: inline-block;
+}
+
+.vrai {
+    position: relative;
+    animation: vrai 2s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 5s;
+    transform-origin: center;
+}
+
+.ou {
+    animation: ou 1s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}
+
+.o {
+    position: relative;
+    animation: o 2s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 2.5s;
+}
+
+.f {
+    position: relative;
+    animation: f 2s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 5s;
+}
+
+.faux {
+    position: relative;
+    outline: solid red;
+    animation: faux 2s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 5s;
+}
+
+.aux {
+    width: 0;
+    position: relative;
+    overflow: hidden;
+    vertical-align: top;
+    height: 1em;
+    left: -0.5em;
+    text-align: left;
+    animation: aux 1s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 6.5s;
+}
+
+.qm {
+    margin-left: 0.7em;
+    position: relative;
+    top: -2em;
+    animation: qm 1s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 7.5s;
+    transform-origin: center;
+}
+
+@keyframes ou {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: 1em;
+    }
+}
+
+@keyframes vrai {
+    0% {
+        color: black;
+        transform: scale(1);
+    }
+    80% {
+        color: green;
+        transform: scale(1);
+    }
+    90% {
+        color: green;
+        transform: scale(1.5);
+    }
+    100% {
+        color: green;
+        transform: scale(1);
+    }
+}
+
+@keyframes o {
+    0% {
+        bottom: 0;
+        left: 0;
+    }
+    20% {
+        bottom: -1em;
+        left: 0;
+    }
+    80% {
+        bottom: -1em;
+        left: -1.8em;
+    }
+    100% {
+        bottom: 0;
+        left: -1.8em;
+    }
+}
+
+@keyframes f {
+    0% {
+        left: 0;
+        color: black;
+        transform: scale(1);
+    }
+    80% {
+        color: red;
+        left: 0.4em;
+        transform: scale(1);
+    }
+    90% {
+        color: red;
+        left: 0.4em;
+        transform: scale(1.5);
+    }
+    100% {
+        color: red;
+        left: 0.4em;
+        transform: scale(1);
+    }
+}
+
+@keyframes aux {
+    0% {
+        left: 0;
+        margin-left: 0;
+        width: 0;
+        color: black;
+    }
+    80% {
+        left: 0.5em;
+        margin-left: -0.65em;
+        width: 1.9em;
+        transform: scale(1);
+        color: red;
+    }
+    90% {
+        left: 0.5em;
+        margin-left: -0.65em;
+        color: red;
+        width: 1.9em;
+        transform: scale(1.5);
+    }
+    100% {
+        left: 0.5em;
+        margin-left: -0.65em;
+        color: red;
+        width: 1.9em;
+        transform: scale(1);
+    }
+}
+
+@keyframes qm {
+    0% {
+        top: -2em;
+    }
+    50% {
+        top: 0;
+        transform: rotate(0);
+    }
+    70% {
+        top: 0;
+        transform: rotate(5deg);
+    }
+    80% {
+        top: 0;
+        transform: rotate(-5deg);
+    }
+    90% {
+        top: 0;
+        transform: rotate(5deg);
+    }
+    100% {
+        top: 0;
+        transform: rotate(-5deg);
+    }
+}
+
+/*.vrai {
+  outline: dashed green;
+}
+.ou {
+  outline: dashed blue;
+}
+.o {
+  outline: dashed light blue;
+}
+.f {
+  outline: dashed red;
+}
+.aux {
+  outline: dashed orange;
+}*/

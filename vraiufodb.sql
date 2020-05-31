@@ -68,19 +68,20 @@ ALTER TABLE en.ufo OWNER TO javarome;
 --
 
 CREATE TABLE fr.ufo (
-    id uuid NOT NULL,
-    title text,
-    media_url character varying(1024)
+                        id        uuid NOT NULL,
+                        title     text,
+                        media_url character varying(1024)
 );
 
 
-ALTER TABLE fr.ufo OWNER TO javarome;
+ALTER TABLE fr.ufo
+    OWNER TO javarome;
 
 --
 -- Data for Name: ufo; Type: TABLE DATA; Schema: en; Owner: javarome
 --
 
-COPY en.ufo (id, title, media_url) FROM stdin;
+COPY en.ufo (id, assertion, media_url) FROM stdin;
 90722ad3-8a0a-48ad-bd04-46408dc3ad62	The Roswell autopsy	https://rr0.org/science/crypto/ufo/enquete/dossier/Roswell/Films/2006_Warner.jpg
 a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	The Roswell crash	https://rr0.org/time/1/9/4/7/07/08/Times.gif
 \.
@@ -90,7 +91,7 @@ a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	The Roswell crash	https://rr0.org/time/1/9/
 -- Data for Name: ufo; Type: TABLE DATA; Schema: fr; Owner: javarome
 --
 
-COPY fr.ufo (id, title, media_url) FROM stdin;
+COPY fr.ufo (id, assertion, media_url) FROM stdin;
 a8214b61-c7b0-4f2b-b6c9-3aeb8718ff6a	Le crash de Roswell	https://rr0.org/time/1/9/4/7/07/08/Times.gif
 90722ad3-8a0a-48ad-bd04-46408dc3ad62	L'autopsie de Roswell	https://rr0.org/science/crypto/ufo/enquete/dossier/Roswell/Films/2006_Warner.jpg
 \.

@@ -9,3 +9,19 @@ body {
 img {
   max-width: 100%;
 }
+
+#question {
+  opacity: 0;
+  animation: question 1s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 5s;
+}
+
+@keyframes question {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Vrai ou faux UFO ?",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node --experimental-modules server.js"
   },
   "dependencies": {
     "squirrelly": "^8.0.1",
@@ -20,5 +22,5 @@
     "faux"
   ],
   "author": "Jérôme Beau",
-  "license": "ISC"
+  "license": "MIT"
 }

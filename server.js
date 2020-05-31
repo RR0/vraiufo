@@ -1,6 +1,17 @@
-const fastify = require('fastify')({logger: true})
-fastify.register(require('fastify-accepts'))
-const fastifyCaching = require('fastify-caching')
+import {API} from "./api/API.mjs";
+
+import Fastify from 'fastify'
+import fastifyAccepts from 'fastify-accepts'
+import fastifyCaching from 'fastify-caching'
+import path, {dirname} from 'path'
+import {fileURLToPath} from 'url';
+
+import fastifyStatic from 'fastify-static';
+import Sqrl from "squirrelly"
+
+const fastify = Fastify({logger: true})
+
+fastify.register(fastifyAccepts)
 fastify.register(
     fastifyCaching,
     {privacy: fastifyCaching.privacy.NOCACHE},
@@ -8,71 +19,60 @@ fastify.register(
       if (err) throw err
     }
 )
-const path = require('path')
-fastify.register(require('fastify-static'), {
-    root: path.join(__dirname, 'public'),
-    prefix: '/public/', // optional: default '/'
-})
-const Sqrl = require("squirrelly")
-const {Pool} = require('pg')
-
-const pool = new Pool({
-    host: 'localhost',
-    database: 'vraiufodb',
-    user: 'javarome'
+fastify.register(fastifyStatic, {
+  root: path.join(dirname(fileURLToPath(import.meta.url)), 'public'),
+  prefix: '/public/', // optional: default '/'
 })
 const uuidPattern = '[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}';
+
+const api = new API();
+
 fastify.get('/', async (req, res) => {
-    const accept = req.accepts()
-    const lang = accept.language(['fr', 'en'])
-    const client = await pool.connect()
-    try {
-        const query = `SELECT id FROM ${lang}.ufo`
-        console.log(query)
-        const result = await client.query(query)
-        const size = result.rows.length;
-        const n = Math.floor(Math.random() * size)
-        console.log(`picking row #${n} among ${size}`)
-        const row = result.rows[n]
-        res.redirect(`/${row.id}`)
-    } finally {
-        client.release()
-    }
+  const accept = req.accepts()
+  const lang = accept.language(['fr', 'en'])
+  const row = await api.getRandom(lang)
+  res.redirect(`/${row.id}`)
 })
+
 fastify.get(`/:id(${uuidPattern})`, async (req, res) => {
-    const accept = req.accepts()
-    const lang = accept.language(['fr', 'en'])
-    const client = await pool.connect()
-    try {
-        const query = {
-            name: 'fetch-ufo',
-            text: `SELECT * FROM ${lang}.ufo WHERE id=$1`,
-            values: [req.params.id],
-        }
-        console.log(query)
-        const result = await client.query(query)
-        const row = result.rows[0]
-        let rendered = await Sqrl.renderFile(`index_${lang}.html`, row)
-        res
-            .code(200)
-            .type('text/html; charset=utf-8')
-            .send(rendered)
-    } finally {
-        client.release()
-    }
+  const accept = req.accepts()
+  const lang = accept.language(['fr', 'en'])
+  const row = await api.get(lang, req.params.id)
+  const rendered = await Sqrl.renderFile(`index_${lang}.html`, row)
+  res
+      .code(200)
+      .type('text/html; charset=utf-8')
+      .send(rendered)
 })
-fastify.get('/submit', async (req, res) => {
-    res.redirect('/');
+
+fastify.get(`/api`, async (req, res) => {
+  const accept = req.accepts()
+  const lang = accept.language(['fr', 'en'])
+  const row = await api.getRandom(lang)
+  res
+      .code(200)
+      .type('application/json; charset=utf-8')
+      .send(row)
+})
+
+fastify.get(`/api/:id(${uuidPattern})`, async (req, res) => {
+  const accept = req.accepts()
+  const lang = accept.language(['fr', 'en'])
+  const row = await api.get(lang, req.params.id)
+  res
+      .code(200)
+      .type('application/json; charset=utf-8')
+      .send(row)
 })
 
 const listenPort = 8080;
 const start = async () => {
-    try {
-        await fastify.listen(listenPort)
-        fastify.log.info(`Listening on ${fastify.server.address().port}`)
-    } catch (err) {
-        fastify.log.error(err)
-        process.exit(1)
-    }
+  try {
+    await fastify.listen(listenPort)
+    fastify.log.info(`Listening on ${fastify.server.address().port}`)
+  } catch (err) {
+    fastify.log.error(err)
+    process.exit(1)
+  }
 }
 start()

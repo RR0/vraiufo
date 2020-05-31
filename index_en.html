@@ -3,15 +3,23 @@
 <head>
   <title>TrUFOrfalse</title>
   <link href="public/index.css" rel="stylesheet"/>
+  <link href="public/title.css" rel="stylesheet"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
-<h1>{{it.title}}</h1>
-<img alt="image" src="{{it.media_url}}"/>
-<form action="submit">
-  <button id="true">True</button>
-  or
-  <button id="false">False</button>
-</form>
+<h1 class="title">
+  <span class="vrai">vrai</span><span class="ou">u</span><span class="f">f</span><span class="o">o</span><span
+    class="aux">aux</span></span><span class="qm">?</span>
+</h1>
+<div class="question">
+  <h2>{{it.assertion}}</h2>
+  <img alt="image" src="{{it.media_url}}"/>
+  <form>
+    <button id="true" onclick="answer(true)">True</button>
+    or
+    <button id="false" onclick="answer(false)">False</button>
+  </form>
+</div>
 </body>
+<script src="public/index.js" type="text/javascript"></script>
 </html>

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "squirrelly": "^8.0.1",
-    "fastify": "^2.14.1",
+    "fastify": "^2.15.1",
     "fastify-accepts": "^1.0.0",
     "fastify-caching": "^5.0.0",
     "fastify-static": "^2.7.0",

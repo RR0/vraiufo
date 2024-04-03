@@ -1,11 +1,3 @@
-import pg from 'pg'
-
-const pool = new pg.Pool({
-  host: 'localhost',
-  database: 'vraiufodb',
-  user: 'javarome'
-})
-
 export class API {
 
   async getRandom(lang) {

@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
   <title>Vraiufo</title>
-  <link href="public/index.css" rel="stylesheet"/>
-  <link href="public/title.css" rel="stylesheet"/>
+  <link href="index.css" rel="stylesheet"/>
+  <link href="title.css" rel="stylesheet"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
@@ -12,8 +12,8 @@
     class="aux">aux</span><span class="qm">?</span>
 </h1>
 <div id="question">
-  <h2>{{it.assertion}}</h2>
-  <img alt="image" src="{{it.media_url}}"/>
+  <h2></h2>
+  <img alt="image" src=""/>
   <form action="javascript:vraiUFO.answer()">
     <button onclick="vraiUFO.answer(true)">Vrai</button>
     ou
@@ -21,9 +21,8 @@
   </form>
 </div>
 </body>
-<script src="https://unpkg.com/squirrelly@8.0.1"></script>
 <script type="module">
-  import {vraiUFO} from './public/index.js'
+  import {vraiUFO} from "./index.mjs"
   window.vraiUFO = vraiUFO;
 </script>
 <script nomodule>

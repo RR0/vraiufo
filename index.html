@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <title>Vraiufo</title>
   <link href="index.css" rel="stylesheet"/>
   <link href="title.css" rel="stylesheet"/>
@@ -15,11 +16,11 @@
   <h2 class="name"></h2>
   <p class="description"></p>
   <div class="image"><img alt="Illustration" src=""/></div>
-  <button id="pick" onclick="vraiUFO.pick()">Pick another</button>
+  <button class="pick" onclick="vraiUFO.pick()">Un autre ↺</button>
   <div class="options">
-    <button onclick="vraiUFO.answer(true)">Vrai</button>
+    <button class="true" onclick="vraiUFO.answer(true)">Vrai</button>
     ou
-    <button onclick="vraiUFO.answer(false)">Faux</button>
+    <button class="false" onclick="vraiUFO.answer(false)">Faux</button>
     ?
   </div>
   <p class="score"></p>

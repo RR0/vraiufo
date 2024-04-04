@@ -7,7 +7,13 @@ const messages_fr = {
       misinterpretation: "C'était une méprise",
       unknown: "Ce cas reste non-identifié pour l'instant"
     },
-    result: (good, total) => good + " bonnes réponses sur " + total
+    result: (good, total) => {
+      const percentage = good / total * 100
+      return `${percentage.toLocaleString("fr", {
+        maximumFractionDigits: 1,
+        useGrouping: false
+      })}% (${good} bonnes réponses sur ${total})`
+    }
   },
   case: {
     classification: {

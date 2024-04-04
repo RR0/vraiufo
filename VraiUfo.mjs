@@ -72,7 +72,7 @@ export class VraiUfo {
     this.score = document.querySelector("#question .score")
     this.image = document.querySelector("#question .image")
     this.form = document.querySelector("#question .options")
-    this.pickButton = document.querySelector("#question #pick")
+    this.pickButton = document.querySelector("#question .pick")
     this.casesFiles = /** @type {string[]} */ await this.fetchArray(new URL(casesDirsUrl, this.baseUrl), "/case.json")
     this.peopleFiles = /** @type {string[]} */ await this.fetchArray(new URL(peopleDirsUrl, this.baseUrl), "/people.json")
     return this.pick()
@@ -112,7 +112,7 @@ export class VraiUfo {
     if (!pickedCase.title) {
       let titleFromUrl = caseUrl.substring(0, caseUrl.length - caseFile.length)
       titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
-      pickedCase.title = titleFromUrl.replaceAll(/([A-Z])/g, " $1").trim()
+      pickedCase.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
     }
     const str = []
     const classification = pickedCase.classification
@@ -120,7 +120,9 @@ export class VraiUfo {
       const hynek = classification.hynek
       if (hynek) {
         const hynekStr = this.messages.case.classification.hynek[hynek]
-        pickedCase.image = hynekStr.image
+        if (!pickedCase.image) {
+          pickedCase.image = hynekStr.image
+        }
         str.push(hynekStr.title)
       }
     }

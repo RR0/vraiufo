@@ -13,6 +13,11 @@ export class Case {
   /**
    * @member {string}
    */
+  place
+
+  /**
+   * @member {string}
+   */
   title
 
   /**

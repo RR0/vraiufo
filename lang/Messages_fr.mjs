@@ -9,10 +9,10 @@ const messages_fr = {
     },
     result: (good, total) => {
       const percentage = good / total * 100
-      return `${percentage.toLocaleString("fr", {
+      return `<b>${percentage.toLocaleString("fr", {
         maximumFractionDigits: 1,
         useGrouping: false
-      })}% (${good} bonnes réponses sur ${total})`
+      })}%</b><br>(${good} bonnes réponses sur ${total})`
     }
   },
   case: {

@@ -57,7 +57,7 @@ export class VraiUfo {
     this.correctAnswersCount += correct ? 1 : 0
     this.name.classList.add(correct ? "true" : "false")
     this.counter++
-    this.score.textContent = answerMessages.result(this.correctAnswersCount, this.counter)
+    this.score.innerHTML = answerMessages.result(this.correctAnswersCount, this.counter)
     this.name.textContent = answerMessages[correct ? "correct" : "incorrect"]
     this.description.innerHTML = `<a href="${this.pickedCase.url}">${answerMessages.conclusion[conclusion]}</a>`
   }
@@ -130,6 +130,7 @@ export class VraiUfo {
       }
     }
     this.image.firstElementChild?.remove()
+    imageHref = pickedCase.image
     if (imageHref) {
       let img
       if (imageHref.indexOf("youtube.com") > 0) {
@@ -150,12 +151,15 @@ export class VraiUfo {
         str.push(this.dateStr(time))
       }
     }
+    if (pickedCase.place) {
+      str.push(pickedCase.place)
+    }
     this.name.textContent = pickedCase.title
     this.description.textContent = str.join(", ")
   }
 
   dateStr(time) {
-    const parsed = /(\d\d\d\d)(?:-(\d\d)(?:-(\d\d))?)?/.exec(time)
+    const parsed = /(\d\d\d\d)(?:-(\d\d)(?:-(\d\d (~)?(\d\d:\d\d)))?)?/.exec(time)
     const date = new Date(time)
     let dateStr = date.toLocaleDateString(navigator.language, {month: "long", year: "numeric"})
     if (!parsed[2]) {

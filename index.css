@@ -1,27 +1,38 @@
+:root {
+  --background-color: white;
+  --color: black;
+}
 * {
   box-sizing: border-box;
 }
+
 body {
+  background-color: var(--background-color);
+  color: var(--color);
   text-align: center;
   font-family: system-ui, sans-serif;
 }
+
 img {
   height: 200px;
 }
+
 .pick {
-  margin: 1em;
-  display: none;
   font-size: 1.5em;
+  margin: 0.7em 0.9em;
+  display: none;
   border-radius: 0.5em;
   padding: 1em;
   appearance: none;
   border: gray;
 }
+
 #question {
+  transition: opacity 2s ease;
   opacity: 0;
   animation: question 1s ease;
   animation-fill-mode: forwards;
-  animation-delay: 5s;
+  animation-delay: 2s;
 }
 
 .name {
@@ -33,6 +44,7 @@ img {
     color: red;
   }
 }
+
 .description {
   margin-bottom: 1em;
 }
@@ -42,13 +54,15 @@ img {
 }
 
 .options button {
+  color: inherit;
   display: inline-grid;
   appearance: none;
   border: 1px outset gainsboro;
   font-size: 2em;
-  padding: 0.8em 1em;
+  padding: 0.7em 0.9em;
   border-radius: 0.5em;
   font-weight: bold;
+  margin: 0.25em;
 
   .ufo {
     font-weight: normal;
@@ -64,11 +78,20 @@ img {
 .options .false {
   background-color: rgba(255, 0, 0, 0.1)
 }
+
 @keyframes question {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background-color: black;
+    --color: white;
   }
 }

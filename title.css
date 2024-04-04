@@ -1,3 +1,7 @@
+:root {
+  --title-speed: 2s;
+}
+
 .title {
     text-align: center;
     font-size: 3em;
@@ -10,34 +14,34 @@
 }
 .vrai {
     position: relative;
-    animation: vrai 2s ease;
+  animation: vrai calc(var(--title-speed) / 2.5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 5s;
+  animation-delay: var(--title-speed);
     transform-origin: center;
 }
 .ou {
-    animation: ou 1s ease;
+  animation: ou calc(var(--title-speed) / 2.5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 2s;
+  animation-delay: calc(var(--title-speed) / 2.5);
 }
 .o {
     position: relative;
-    animation: o 2s ease;
+  animation: o calc(var(--title-speed) / 2.5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 2.5s;
+  animation-delay: calc(var(--title-speed) / 2);
 }
 .f {
     position: relative;
-    animation: f 2s ease;
+  animation: f calc(var(--title-speed) / 2.5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 5s;
+  animation-delay: var(--title-speed);
 }
 .faux {
     position: relative;
     outline: solid red;
-    animation: faux 2s ease;
+  animation: faux calc(var(--title-speed) / 2.5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 5s;
+  animation-delay: var(--title-speed);
 }
 .aux {
     width: 0;
@@ -47,18 +51,18 @@
     height: 1em;
     left: -0.5em;
     text-align: left;
-    animation: aux 1s ease;
+  animation: aux calc(var(--title-speed) / 5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 6.5s;
+  animation-delay: calc(var(--title-speed) * 1.2);
 }
 
 .qm {
     margin-left: 0.7em;
     position: relative;
     top: -2em;
-    animation: qm 1s ease;
+  animation: qm calc(var(--title-speed) / 5) ease;
     animation-fill-mode: forwards;
-    animation-delay: 7.5s;
+  animation-delay: calc(var(--title-speed) * 1.5);
     transform-origin: center;
 }
 

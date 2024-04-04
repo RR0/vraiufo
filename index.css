@@ -5,10 +5,15 @@
 
 body {
   text-align: center;
+  font-family: system-ui, sans-serif;
 }
 
 img {
   max-width: 100%;
+}
+
+.pick {
+  display: none;
 }
 
 #question {

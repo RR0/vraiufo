@@ -7,23 +7,37 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
-<h1 class="title" onclick="answer()">
+<h1 class="title">
   <span class="vrai">vrai</span><span class="ou">u</span><span class="f">f</span><span class="o">o</span><span
     class="aux">aux</span><span class="qm">?</span>
 </h1>
 <div id="question">
-  <h2></h2>
-  <img alt="image" src=""/>
-  <form action="javascript:vraiUFO.answer()">
+  <h2 class="name"></h2>
+  <p class="description"></p>
+  <div class="image"><img alt="Illustration" src=""/></div>
+  <button id="pick" onclick="vraiUFO.pick()">Pick another</button>
+  <div class="options">
     <button onclick="vraiUFO.answer(true)">Vrai</button>
     ou
     <button onclick="vraiUFO.answer(false)">Faux</button>
-  </form>
+    ?
+  </div>
+  <p class="score"></p>
 </div>
 </body>
 <script type="module">
-  import {vraiUFO} from "./index.mjs"
-  window.vraiUFO = vraiUFO;
+  let lang = navigator.language.substring(0, 2)
+  if (!["fr", "en"].includes(lang)) {
+    lang = "en"
+  }
+  import {VraiUfo} from "./VraiUfo.mjs"
+
+  import("./lang/Messages_" + lang + ".mjs").then(messages => {
+    const vraiUFO = new VraiUfo(messages.default, new URL("https://rr0.org"))
+    vraiUFO.init("casesDirs.json", "peopleDirs.json").then(() => {
+      window.vraiUFO = vraiUFO
+    })
+  })
 </script>
 <script nomodule>
   alert("This website requires a modern browser")

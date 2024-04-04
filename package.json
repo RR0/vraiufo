@@ -4,8 +4,7 @@
   "description": "Vrai ou faux UFO ?",
   "type": "module",
   "scripts": {
-    "test": "test",
-    "start": "node --experimental-modules server.js"
+    "test": "testscript"
   },
   "dependencies": {
     "@javarome/testscript": "^0.10.7"

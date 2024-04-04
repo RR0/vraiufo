@@ -1,209 +1,200 @@
 :root {
-  --title-speed: 2s;
+  --title-speed: 1s;
 }
 
 .title {
-    text-align: center;
-    font-size: 3em;
-    font-family: monospace, sans-serif;
-    height: 2em;
-    vertical-align: top;
+  text-align: center;
+  font-size: 3em;
+  font-family: monospace, sans-serif;
+  height: 2em;
+  vertical-align: top;
 }
+
 .title span {
-    display: inline-block;
+  display: inline-block;
 }
+
 .vrai {
-    position: relative;
+  position: relative;
   animation: vrai calc(var(--title-speed) / 2.5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: var(--title-speed);
-    transform-origin: center;
+  transform-origin: center;
 }
+
 .ou {
   animation: ou calc(var(--title-speed) / 2.5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: calc(var(--title-speed) / 2.5);
 }
+
 .o {
-    position: relative;
+  position: relative;
   animation: o calc(var(--title-speed) / 2.5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: calc(var(--title-speed) / 2);
 }
+
 .f {
-    position: relative;
+  position: relative;
   animation: f calc(var(--title-speed) / 2.5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: var(--title-speed);
 }
+
 .faux {
-    position: relative;
-    outline: solid red;
+  position: relative;
+  outline: solid red;
   animation: faux calc(var(--title-speed) / 2.5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: var(--title-speed);
 }
+
 .aux {
-    width: 0;
-    position: relative;
-    overflow: hidden;
-    vertical-align: top;
-    height: 1em;
-    left: -0.5em;
-    text-align: left;
+  width: 0;
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+  height: 1em;
+  left: -0.5em;
+  text-align: left;
   animation: aux calc(var(--title-speed) / 5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: calc(var(--title-speed) * 1.2);
 }
 
 .qm {
-    margin-left: 0.7em;
-    position: relative;
-    top: -2em;
+  margin-left: 0.7em;
+  position: relative;
+  top: -2em;
   animation: qm calc(var(--title-speed) / 5) ease;
-    animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   animation-delay: calc(var(--title-speed) * 1.5);
-    transform-origin: center;
+  transform-origin: center;
 }
 
 @keyframes ou {
-    0% {
-        margin-left: 0;
-    }
-    100% {
-        margin-left: 1em;
-    }
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 1em;
+  }
 }
 
 @keyframes vrai {
-    0% {
-        color: black;
-        transform: scale(1);
-    }
-    80% {
-        color: green;
-        transform: scale(1);
-    }
-    90% {
-        color: green;
-        transform: scale(1.5);
-    }
-    100% {
-        color: green;
-        transform: scale(1);
-    }
+  0% {
+    color: black;
+    transform: scale(1);
+  }
+  80% {
+    color: green;
+    transform: scale(1);
+  }
+  90% {
+    color: green;
+    transform: scale(1.5);
+  }
+  100% {
+    color: green;
+    transform: scale(1);
+  }
 }
 
 @keyframes o {
-    0% {
-        bottom: 0;
-        left: 0;
-    }
-    20% {
-        bottom: -1em;
-        left: 0;
-    }
-    80% {
-        bottom: -1em;
-        left: -1.8em;
-    }
-    100% {
-        bottom: 0;
-        left: -1.8em;
-    }
+  0% {
+    bottom: 0;
+    left: 0;
+  }
+  20% {
+    bottom: -1em;
+    left: 0;
+  }
+  80% {
+    bottom: -1em;
+    left: -1.8em;
+  }
+  100% {
+    bottom: 0;
+    left: -1.8em;
+  }
 }
 
 @keyframes f {
-    0% {
-        left: 0;
-        color: black;
-        transform: scale(1);
-    }
-    80% {
-        color: red;
-        left: 0.4em;
-        transform: scale(1);
-    }
-    90% {
-        color: red;
-        left: 0.4em;
-        transform: scale(1.5);
-    }
-    100% {
-        color: red;
-        left: 0.4em;
-        transform: scale(1);
-    }
+  0% {
+    left: 0;
+    color: black;
+    transform: scale(1);
+  }
+  80% {
+    color: red;
+    left: 0.4em;
+    transform: scale(1);
+  }
+  90% {
+    color: red;
+    left: 0.4em;
+    transform: scale(1.5);
+  }
+  100% {
+    color: red;
+    left: 0.4em;
+    transform: scale(1);
+  }
 }
 
 @keyframes aux {
-    0% {
-        left: 0;
-        margin-left: 0;
-        width: 0;
-        color: black;
-    }
-    80% {
-        left: 0.5em;
-        margin-left: -0.65em;
-        width: 1.9em;
-        transform: scale(1);
-        color: red;
-    }
-    90% {
-        left: 0.5em;
-        margin-left: -0.65em;
-        color: red;
-        width: 1.9em;
-        transform: scale(1.5);
-    }
-    100% {
-        left: 0.5em;
-        margin-left: -0.65em;
-        color: red;
-        width: 1.9em;
-        transform: scale(1);
-    }
+  0% {
+    left: 0;
+    margin-left: 0;
+    width: 0;
+    color: black;
+  }
+  80% {
+    left: 0.5em;
+    margin-left: -0.65em;
+    width: 1.9em;
+    transform: scale(1);
+    color: red;
+  }
+  90% {
+    left: 0.5em;
+    margin-left: -0.65em;
+    color: red;
+    width: 1.9em;
+    transform: scale(1.5);
+  }
+  100% {
+    left: 0.5em;
+    margin-left: -0.65em;
+    color: red;
+    width: 1.9em;
+    transform: scale(1);
+  }
 }
 
 @keyframes qm {
-    0% {
-        top: -2em;
-    }
-    50% {
-        top: 0;
-        transform: rotate(0);
-    }
-    70% {
-        top: 0;
-        transform: rotate(5deg);
-    }
-    80% {
-        top: 0;
-        transform: rotate(-5deg);
-    }
-    90% {
-        top: 0;
-        transform: rotate(5deg);
-    }
-    100% {
-        top: 0;
-        transform: rotate(-5deg);
-    }
+  0% {
+    top: -2em;
+  }
+  50% {
+    top: 0;
+    transform: rotate(0);
+  }
+  70% {
+    top: 0;
+    transform: rotate(5deg);
+  }
+  80% {
+    top: 0;
+    transform: rotate(-5deg);
+  }
+  90% {
+    top: 0;
+    transform: rotate(5deg);
+  }
+  100% {
+    top: 0;
+    transform: rotate(-5deg);
+  }
 }
-
-/*.vrai {
-  outline: dashed green;
-}
-.ou {
-  outline: dashed blue;
-}
-.o {
-  outline: dashed light blue;
-}
-.f {
-  outline: dashed red;
-}
-.aux {
-  outline: dashed orange;
-}*/

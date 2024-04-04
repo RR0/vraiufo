@@ -18,10 +18,10 @@
   <div class="image"><img alt="Illustration" src=""/></div>
   <button class="pick" onclick="vraiUFO.pick()">Un autre ↺</button>
   <div class="options">
-    <button class="true" onclick="vraiUFO.answer(true)">Vrai</button>
+    <button class="true" onclick="vraiUFO.answer(true)">Vrai <span class="ufo">ovni</span></button>
     ou
-    <button class="false" onclick="vraiUFO.answer(false)">Faux</button>
-    ?
+    <button class="false" onclick="vraiUFO.answer(false)">Faux <span class="ufo">ovni</span></button>
+     ?
   </div>
   <p class="score"></p>
 </div>
@@ -32,7 +32,6 @@
     lang = "en"
   }
   import {VraiUfo} from "./VraiUfo.mjs"
-
   import("./lang/Messages_" + lang + ".mjs").then(messages => {
     const vraiUFO = new VraiUfo(messages.default, new URL("https://rr0.org"))
     vraiUFO.init("casesDirs.json", "peopleDirs.json").then(() => {

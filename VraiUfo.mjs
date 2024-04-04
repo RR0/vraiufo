@@ -55,6 +55,7 @@ export class VraiUfo {
     this.form.style.display = "none"
     this.pickButton.style.display = "inline-block"
     this.correctAnswersCount += correct ? 1 : 0
+    this.name.classList.add(correct ? "true" : "false")
     this.counter++
     this.score.textContent = answerMessages.result(this.correctAnswersCount, this.counter)
     this.name.textContent = answerMessages[correct ? "correct" : "incorrect"]
@@ -103,6 +104,7 @@ export class VraiUfo {
   async pick() {
     this.pickButton.style.display = "none"
     this.form.style.display = "block"
+    this.name.className = "name"
     const caseIndex = Math.floor(Math.random() * this.casesFiles.length)
     const caseUrl = this.casesFiles[caseIndex]
     const pickedCase = this.pickedCase = await this.fetchJson(new URL(caseUrl, this.baseUrl))
@@ -116,20 +118,27 @@ export class VraiUfo {
     }
     const str = []
     const classification = pickedCase.classification
+    let imageHref = pickedCase.image
     if (classification) {
       const hynek = classification.hynek
       if (hynek) {
         const hynekStr = this.messages.case.classification.hynek[hynek]
-        if (!pickedCase.image) {
+        if (!imageHref) {
           pickedCase.image = hynekStr.image
         }
         str.push(hynekStr.title)
       }
     }
-    this.image.firstElementChild.remove()
-    if (pickedCase.image) {
-      const img = document.createElement("img")
-      img.src = new URL(pickedCase.image, this.baseUrl).href
+    this.image.firstElementChild?.remove()
+    if (imageHref) {
+      let img
+      if (imageHref.indexOf("youtube.com") > 0) {
+        img = document.createElement("div")
+        img.innerHTML = `<iframe width="560" height="315" src="${imageHref}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+      } else {
+        img = document.createElement("img")
+        img.src = new URL(imageHref, this.baseUrl).href
+      }
       this.image.append(img)
     }
     const time = pickedCase.time

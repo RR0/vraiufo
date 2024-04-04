@@ -1,7 +1,7 @@
 const messages_fr = {
   answer: {
-    correct: "Correct !",
-    incorrect: "Incorrect",
+    correct: "✔ Exact !",
+    incorrect: "✘ Inexact",
     conclusion: {
       hoax: "C'était un canular",
       misinterpretation: "C'était une méprise",
@@ -35,11 +35,11 @@ const messages_fr = {
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
         },
         CE2: {
-          title: "Rencontre Rapprochée du 2ème type (interaction proche)",
+          title: "Rencontre Rapprochée du 2ᵉ type (interaction proche)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/2/Logo.jpg"
         },
         CE3: {
-          title: "Rencontre Rapprochée du 3ème type (observation d'occupant)",
+          title: "Rencontre Rapprochée du 3ᵉ type (observation d'occupant)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
         CE4: {

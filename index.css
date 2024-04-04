@@ -24,6 +24,15 @@ img {
   animation-delay: 5s;
 }
 
+.name {
+  &.true {
+    color: green;
+  }
+
+  &.false {
+    color: red;
+  }
+}
 .description {
   margin-bottom: 1em;
 }
@@ -33,15 +42,22 @@ img {
 }
 
 .options button {
+  display: inline-grid;
   appearance: none;
   border: 1px outset gainsboro;
   font-size: 2em;
-  padding: 1em;
+  padding: 0.8em 1em;
   border-radius: 0.5em;
   font-weight: bold;
+
+  .ufo {
+    font-weight: normal;
+    font-size: 0.5em;
+  }
 }
 
 .options .true {
+  margin-left: 1em;
   background-color: rgba(0, 255, 0, 0.1)
 }
 

@@ -90,7 +90,29 @@ class CaseMessages {
   classification
 }
 
+class QuestionMessages {
+  /**
+   * @member {string}
+   */
+  true
+
+  /**
+   * @member {string}
+   */
+  false
+
+  /**
+   * @member {string}
+   */
+  or
+}
+
 class Messages {
+  /**
+   * @member {QuestionMessages}
+   */
+  question
+
   /**
    * @member {AnswerMessages}
    */

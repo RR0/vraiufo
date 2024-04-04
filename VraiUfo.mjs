@@ -49,10 +49,10 @@ export class VraiUfo {
   answer(value) {
     const answerMessages = this.messages.answer
     const conclusion = this.pickedCase.conclusion || "unknown"
-    const unknownAndTrue = conclusion === "unknown" && value
-    const explainedAndFalse = conclusion !== "unknown" && !value
+    const unknownAndTrue = conclusion === "unknown" && value === "true"
+    const explainedAndFalse = conclusion !== "unknown" && value === "false"
     const correct = unknownAndTrue || explainedAndFalse
-    this.form.style.display = "none"
+    this.form.style.opacity = "0"
     this.pickButton.style.display = "inline-block"
     this.correctAnswersCount += correct ? 1 : 0
     this.name.classList.add(correct ? "true" : "false")
@@ -73,10 +73,26 @@ export class VraiUfo {
     this.score = document.querySelector("#question .score")
     this.image = document.querySelector("#question .image")
     this.form = document.querySelector("#question .options")
+    this.form.append(this.createButton("true"))
+    this.form.append(this.messages.question.or)
+    this.form.append(this.createButton("false"))
+    this.form.append("?")
     this.pickButton = document.querySelector("#question .pick")
     this.casesFiles = /** @type {string[]} */ await this.fetchArray(new URL(casesDirsUrl, this.baseUrl), "/case.json")
     this.peopleFiles = /** @type {string[]} */ await this.fetchArray(new URL(peopleDirsUrl, this.baseUrl), "/people.json")
     return this.pick()
+  }
+
+  /**
+   * @param {string} clazz
+   * @return {HTMLButtonElement}
+   */
+  createButton(clazz) {
+    const button = document.createElement("button")
+    button.className = clazz
+    button.innerHTML = this.messages.question[clazz]
+    button.addEventListener("click", () => this.answer(clazz))
+    return button
   }
 
   /**
@@ -103,7 +119,7 @@ export class VraiUfo {
 
   async pick() {
     this.pickButton.style.display = "none"
-    this.form.style.display = "block"
+    this.form.style.opacity = "1"
     this.name.className = "name"
     const caseIndex = Math.floor(Math.random() * this.casesFiles.length)
     const caseUrl = this.casesFiles[caseIndex]
@@ -159,11 +175,11 @@ export class VraiUfo {
   }
 
   dateStr(time) {
-    const parsed = /(\d\d\d\d)(?:-(\d\d)(?:-(\d\d (~)?(\d\d:\d\d)))?)?/.exec(time)
     const date = new Date(time)
     let dateStr = date.toLocaleDateString(navigator.language, {month: "long", year: "numeric"})
-    if (!parsed[2]) {
-      dateStr = dateStr.replaceAll("janvier", "")
+    const parsed = /(\d\d\d\d)(?:-(\d\d)(?:-(\d\d (~)?(\d\d:\d\d)))?)?/.exec(time)
+    if (!parsed?.[2]) {
+      dateStr = dateStr.replaceAll("janvier", "").replaceAll("january", "")
     }
     return dateStr
   }

@@ -28,7 +28,7 @@ img {
 }
 
 #question {
-  transition: opacity 2s ease;
+  transition: opacity 0.3s ease;
   opacity: 0;
   animation: question 1s ease;
   animation-fill-mode: forwards;

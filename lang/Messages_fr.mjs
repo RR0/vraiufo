@@ -1,4 +1,9 @@
 const messages_fr = {
+  question: {
+    true: `Vrai <span class="ufo">ovni</span>`,
+    false: `Faux <span class="ufo">ovni</span>`,
+    or: `ou`
+  },
   answer: {
     correct: "✔ Exact !",
     incorrect: "✘ Inexact",

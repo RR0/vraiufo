@@ -105,6 +105,11 @@ class QuestionMessages {
    * @member {string}
    */
   or
+
+  /**
+   * @member {string}
+   */
+  pick
 }
 
 class Messages {

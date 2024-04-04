@@ -78,6 +78,7 @@ export class VraiUfo {
     this.form.append(this.createButton("false"))
     this.form.append("?")
     this.pickButton = document.querySelector("#question .pick")
+    this.pickButton.textContent = this.messages.question.pick
     this.casesFiles = /** @type {string[]} */ await this.fetchArray(new URL(casesDirsUrl, this.baseUrl), "/case.json")
     this.peopleFiles = /** @type {string[]} */ await this.fetchArray(new URL(peopleDirsUrl, this.baseUrl), "/people.json")
     return this.pick()

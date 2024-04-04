@@ -1,8 +1,9 @@
 const messages_en = {
   question: {
-    or: `or`,
     true: `True <span class="ufo">ufo</span>`,
-    false: `False <span class="ufo">ufo</span>`
+    or: `or`,
+    false: `False <span class="ufo">ufo</span>`,
+    pick: `Another ↺`
   },
   answer: {
     correct: "✔ Correct !",

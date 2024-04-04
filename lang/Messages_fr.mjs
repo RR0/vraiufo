@@ -1,12 +1,13 @@
 const messages_fr = {
   question: {
     true: `Vrai <span class="ufo">ovni</span>`,
+    or: `ou`,
     false: `Faux <span class="ufo">ovni</span>`,
-    or: `ou`
+    pick: `Un autre ↺`
   },
   answer: {
     correct: "✔ Exact !",
-    incorrect: "✘ Inexact",
+    incorrect: "✘ Eh non !",
     conclusion: {
       hoax: "C'était un canular",
       misinterpretation: "C'était une méprise",

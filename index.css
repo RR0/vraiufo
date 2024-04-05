@@ -1,6 +1,7 @@
 :root {
   --background-color: white;
   --color: black;
+  --link-color: #0000EE;
 }
 * {
   box-sizing: border-box;
@@ -14,11 +15,12 @@ body {
 }
 
 img {
-  height: 200px;
+  max-height: 200px;
+  max-width: 100%;
 }
 
 .pick {
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin: 0.7em 0.9em;
   display: none;
   border-radius: 0.5em;
@@ -59,7 +61,7 @@ img {
   appearance: none;
   border: 1px outset gainsboro;
   font-size: 2em;
-  padding: 0.7em 0.9em;
+  padding: 0.65em 0.9em;
   border-radius: 0.5em;
   font-weight: bold;
   margin: 0.25em;
@@ -93,5 +95,6 @@ img {
     color-scheme: dark;
     --background-color: black;
     --color: white;
+    --link-color: #7777FF;
   }
 }

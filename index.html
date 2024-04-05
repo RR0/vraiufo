@@ -16,7 +16,7 @@
   <h2 class="name"></h2>
   <p class="description"></p>
   <div class="image"><img alt="Illustration" src=""/></div>
-  <button class="pick" onclick="vraiUFO.pick()"></button>
+  <button class="pick" onclick="vraiUFO.pickCase()"></button>
   <div class="options"></div>
   <p class="score"></p>
 </div>
@@ -27,9 +27,12 @@
     lang = "en"
   }
   import {VraiUfo} from "./VraiUfo.mjs"
+
   import("./lang/Messages_" + lang + ".mjs").then(messages => {
     const vraiUFO = new VraiUfo(messages.default, new URL("https://rr0.org"))
-    vraiUFO.init("casesDirs.json", "peopleDirs.json").then(() => {
+    const caseIndex = new URLSearchParams(location.search).get("caseIndex")
+    const caseNumber = caseIndex ? parseInt(caseIndex, 10) : undefined
+    vraiUFO.init("casesDirs.json", "peopleDirs.json", caseNumber).then(() => {
       window.vraiUFO = vraiUFO
     })
   })

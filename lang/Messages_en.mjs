@@ -18,7 +18,7 @@ const messages_en = {
       return `<b>${percentage.toLocaleString("en", {
         maximumFractionDigits: 1,
         useGrouping: false
-      })}%</b><br>(${good} good answers of ${total})`
+      })}%</b> of good answers<br>(${good} of ${total})`
     }
   },
   case: {

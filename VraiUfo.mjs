@@ -27,6 +27,11 @@ export class VraiUfo {
   pickedCase
 
   /**
+   * @member {People}
+   */
+  pickedPeople
+
+  /**
    * @member {number}
    */
   counter = 0
@@ -66,8 +71,9 @@ export class VraiUfo {
    *
    * @param {string} casesDirsUrl
    * @param {string} peopleDirsUrl
+   * @param {number} caseIndex
    */
-  async init(casesDirsUrl, peopleDirsUrl) {
+  async init(casesDirsUrl, peopleDirsUrl, caseIndex) {
     this.name = document.querySelector("#question .name")
     this.description = document.querySelector("#question .description")
     this.score = document.querySelector("#question .score")
@@ -81,7 +87,7 @@ export class VraiUfo {
     this.pickButton.textContent = this.messages.question.pick
     this.casesFiles = /** @type {string[]} */ await this.fetchArray(new URL(casesDirsUrl, this.baseUrl), "/case.json")
     this.peopleFiles = /** @type {string[]} */ await this.fetchArray(new URL(peopleDirsUrl, this.baseUrl), "/people.json")
-    return this.pick()
+    return this.pickCase(caseIndex)
   }
 
   /**
@@ -118,14 +124,17 @@ export class VraiUfo {
     return await casesResponse.json()
   }
 
-  async pick() {
+  /**
+   * @param {number} caseIndex
+   * @return {Promise<void>}
+   */
+  async pickCase(caseIndex = Math.floor(Math.random() * this.casesFiles.length)) {
     this.pickButton.style.display = "none"
     this.form.style.opacity = "1"
     this.name.className = "name"
-    const caseIndex = Math.floor(Math.random() * this.casesFiles.length)
     const caseUrl = this.casesFiles[caseIndex]
     const pickedCase = this.pickedCase = await this.fetchJson(new URL(caseUrl, this.baseUrl))
-    console.debug(pickedCase)
+    console.debug(caseIndex, pickedCase)
     const caseFile = "/case.json"
     pickedCase.url = new URL(caseUrl.replace(caseFile, "/index.html"), this.baseUrl)
     if (!pickedCase.title) {
@@ -149,14 +158,8 @@ export class VraiUfo {
     this.image.firstElementChild?.remove()
     imageHref = pickedCase.image
     if (imageHref) {
-      let img
-      if (imageHref.indexOf("youtube.com") > 0) {
-        img = document.createElement("div")
-        img.innerHTML = `<iframe width="560" height="315" src="${imageHref}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-      } else {
-        img = document.createElement("img")
-        img.src = new URL(imageHref, this.baseUrl).href
-      }
+      const img = document.createElement("img")
+      img.src = new URL(imageHref, this.baseUrl).href
       this.image.append(img)
     }
     const time = pickedCase.time
@@ -172,6 +175,66 @@ export class VraiUfo {
       str.push(pickedCase.place)
     }
     this.name.textContent = pickedCase.title
+    this.description.textContent = str.join(", ")
+  }
+
+  /**
+   * @param {number} peopleIndex
+   * @return {Promise<void>}
+   */
+  async pickPeople(peopleIndex = Math.floor(Math.random() * this.peopleFiles.length)) {
+    this.pickButton.style.display = "none"
+    this.form.style.opacity = "1"
+    this.name.className = "name"
+    const peopleUrl = this.peopleFiles[peopleIndex]
+    const pickedPeople = this.pickedPeople = await this.fetchJson(new URL(peopleUrl, this.baseUrl))
+    console.debug(peopleIndex, pickedPeople)
+    const peopleFile = "/people.json"
+    pickedPeople.url = new URL(peopleUrl.replace(peopleFile, "/index.html"), this.baseUrl)
+    if (!pickedPeople.title) {
+      let titleFromUrl = peopleUrl.substring(0, peopleUrl.length - peopleFile.length)
+      titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
+      pickedPeople.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
+    }
+    const str = []
+    const classification = pickedPeople.classification
+    let imageHref = pickedPeople.image
+    if (classification) {
+      const hynek = classification.hynek
+      if (hynek) {
+        const hynekStr = this.messages.people.classification.hynek[hynek]
+        if (!imageHref) {
+          pickedPeople.image = hynekStr.image
+        }
+        str.push(hynekStr.title)
+      }
+    }
+    this.image.firstElementChild?.remove()
+    imageHref = pickedPeople.image
+    if (imageHref) {
+      let img
+      if (imageHref.indexOf("youtube.com") > 0) {
+        img = document.createElement("div")
+        img.innerHTML = `<iframe width="560" height="315" src="${imageHref}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+      } else {
+        img = document.createElement("img")
+        img.src = new URL(imageHref, this.baseUrl).href
+      }
+      this.image.append(img)
+    }
+    const time = pickedPeople.time
+    if (time) {
+      const parts = time.split("/")
+      if (parts.length > 1) {
+        str.push(this.dateStr(parts[0]) + " à " + this.dateStr(parts[1]))
+      } else {
+        str.push(this.dateStr(time))
+      }
+    }
+    if (pickedPeople.place) {
+      str.push(pickedPeople.place)
+    }
+    this.name.textContent = pickedPeople.title
     this.description.textContent = str.join(", ")
   }
 

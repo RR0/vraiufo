@@ -18,7 +18,7 @@ const messages_fr = {
       return `<b>${percentage.toLocaleString("fr", {
         maximumFractionDigits: 1,
         useGrouping: false
-      })}%</b><br>(${good} bonnes réponses sur ${total})`
+      })}%</b> de bonnes réponses<br>(${good} sur ${total})`
     }
   },
   case: {
@@ -45,7 +45,7 @@ const messages_fr = {
           image: "/science/crypto/ufo/observation/classification/hynek/rr/2/Logo.jpg"
         },
         CE3: {
-          title: "Rencontre Rapprochée du 3ᵉ type (observation d'occupant)",
+          title: "Rencontre Rapprochée du 3ᵉ type (observation d'entité)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
         CE4: {

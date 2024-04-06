@@ -110,6 +110,8 @@ class QuestionMessages {
    * @member {string}
    */
   pick
+
+  between
 }
 
 class Messages {

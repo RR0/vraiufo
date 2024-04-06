@@ -3,7 +3,8 @@ const messages_en = {
     true: `True <span class="ufo">ufo</span>`,
     or: `or`,
     false: `False <span class="ufo">ufo</span>`,
-    pick: `Another ↺`
+    pick: `Another ↺`,
+    between: (from, to) => `${from} to ${to}`
   },
   answer: {
     correct: "✔ Correct !",

@@ -137,7 +137,7 @@ export class VraiUfo {
     console.debug(caseIndex, pickedCase)
     const caseFile = "/case.json"
     pickedCase.url = new URL(caseUrl.replace(caseFile, "/index.html"), this.baseUrl)
-    if (!pickedCase.title) {
+    if (!navigator.language.startsWith("fr") || !pickedCase.title) {
       let titleFromUrl = caseUrl.substring(0, caseUrl.length - caseFile.length)
       titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
       pickedCase.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
@@ -160,13 +160,15 @@ export class VraiUfo {
     if (imageHref) {
       const img = document.createElement("img")
       img.src = new URL(imageHref, this.baseUrl).href
+      img.setAttribute("onclick",
+        `this.classList.contains('zoomed') ? document.exitFullscreen() && this.classList.toggle('zoomed', false): this.classList.toggle('zoomed', true) && this.requestFullscreen()`)
       this.image.append(img)
     }
     const time = pickedCase.time
     if (time) {
       const parts = time.split("/")
       if (parts.length > 1) {
-        str.push(this.dateStr(parts[0]) + " à " + this.dateStr(parts[1]))
+        str.push(this.messages.question.between(this.dateStr(parts[0]), this.dateStr(parts[1])))
       } else {
         str.push(this.dateStr(time))
       }

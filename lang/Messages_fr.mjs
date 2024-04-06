@@ -3,7 +3,8 @@ const messages_fr = {
     true: `Vrai <span class="ufo">ovni</span>`,
     or: `ou`,
     false: `Faux <span class="ufo">ovni</span>`,
-    pick: `Un autre ↺`
+    pick: `Un autre ↺`,
+    between: (from, to) => `${from} à ${to}`
   },
   answer: {
     correct: "✔ Exact !",

@@ -3,6 +3,7 @@
   --color: black;
   --link-color: #0000EE;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -17,6 +18,11 @@ body {
 img {
   max-height: 200px;
   max-width: 100%;
+  cursor: zoom-in;
+}
+
+img.zoomed {
+  cursor: zoom-out;
 }
 
 .pick {

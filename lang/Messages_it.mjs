@@ -4,7 +4,7 @@ const messages_it = {
     or: `o`,
     false: `Falso <span class="ufo">ufo</span>`,
     pick: `Un altro ↺`,
-    between: (from, to) => `${from} to ${to}`,
+    between: (from, to) => `${from} a ${to}`,
     circa: (date) => "intorno a " + date
   },
   answer: {

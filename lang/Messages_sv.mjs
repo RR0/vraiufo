@@ -1,65 +1,65 @@
-const messages_it = {
+const messages_sv = {
   question: {
-    true: `Vero <span class="ufo">ufo</span>`,
-    or: `o`,
-    false: `Falso <span class="ufo">ufo</span>`,
-    pick: `Un altro ↺`,
+    true: `Riktig <span class="ufo">ufo</span>`,
+    or: `eller`,
+    false: `Falska <span class="ufo">ufo</span>`,
+    pick: `Annan ↺`,
     between: (from, to) => `${from} to ${to}`,
-    circa: (date) => "intorno a " + date
+    circa: (date) => "runt " + date
   },
   answer: {
-    correct: "✔ Giusto !",
-    incorrect: "✘ Sbagliato",
+    correct: "✔ Exakt !",
+    incorrect: "✘ Felaktig",
     conclusion: {
-      hoax: "Era una bufala",
-      misinterpretation: "È stato un errore",
-      unknown: "Questo caso rimane non identificato per il momento"
+      hoax: "Det var en bluff",
+      misinterpretation: "Det var ett misstag",
+      unknown: "Detta fall förblir oidentifierat för tillfället"
     },
     result: (good, total) => {
       const percentage = good / total * 100
-      return `<b>${percentage.toLocaleString("it", {
+      return `<b>${percentage.toLocaleString("sv", {
         maximumFractionDigits: 1,
         useGrouping: false
-      })}%</b> di risposte corrette<br>(${good} su ${total})`
+      })}%</b> rätt svar<br>(${good} av ${total})`
     }
   },
   case: {
     classification: {
       hynek: {
         NL: {
-          title: "Luce Notturna",
+          title: "Nattlampa",
           image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
         },
         DD: {
-          title: "Disco Diurno",
+          title: "Dagskiva",
           image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
         },
         RV: {
-          title: "Radar-Visivo",
+          title: "Visuell-radar",
           image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
         },
         CE1: {
-          title: "Incontro ravvicinato del 1° tipo (vista da vicino)",
+          title: "Nära möte av 1:a typen (nära observation)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
         },
         CE2: {
-          title: "Incontro ravvicinato del 2° tipo (stretta interazione)",
+          title: "Nära möte av den andra typen (nära interaktion)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/2/Logo.jpg"
         },
         CE3: {
-          title: "Incontro ravvicinato del 3° tipo (entità osservata)",
+          title: "Nära möte av den tredje typen (observerad enhet)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
         CE4: {
-          title: "Rapimento",
+          title: "Kidnappning",
           image: "/time/1/9/3/5/06/AstoundingStories.jpg"
         },
         CE5: {
-          title: "Contatto",
+          title: "Kontakt",
           image: "/people/v/VorilhonClaude/rael1.jpg"
         }
       }
     }
   }
 }
-export default messages_it
+export default messages_sv

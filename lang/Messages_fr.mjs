@@ -4,7 +4,8 @@ const messages_fr = {
     or: `ou`,
     false: `Faux <span class="ufo">ovni</span>`,
     pick: `Un autre ↺`,
-    between: (from, to) => `${from} à ${to}`
+    between: (from, to) => `${from} à ${to}`,
+    circa: (date) => "vers " + date
   },
   answer: {
     correct: "✔ Exact !",

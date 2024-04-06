@@ -4,7 +4,8 @@ const messages_en = {
     or: `or`,
     false: `False <span class="ufo">ufo</span>`,
     pick: `Another ↺`,
-    between: (from, to) => `${from} to ${to}`
+    between: (from, to) => `${from} to ${to}`,
+    circa: (date) => "circa " + date
   },
   answer: {
     correct: "✔ Correct !",

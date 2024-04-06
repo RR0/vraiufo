@@ -240,12 +240,19 @@ export class VraiUfo {
     this.description.textContent = str.join(", ")
   }
 
+  /**
+   * @param {string} time ISO date with possible "circa" (~) sign
+   * @return {string} Readable date
+   */
   dateStr(time) {
-    const date = new Date(time)
+    const date = new Date(time.replaceAll("~", ""))
     let dateStr = date.toLocaleDateString(navigator.language, {month: "long", year: "numeric"})
-    const parsed = /(\d\d\d\d)(?:-(\d\d)(?:-(\d\d (~)?(\d\d:\d\d)))?)?/.exec(time)
-    if (!parsed?.[2]) {
+    const parsed = /(~)?(\d\d\d\d)(?:-(\d\d)(?:-(?:(\d\d) (~)?(\d\d:\d\d)))?)?/.exec(time)
+    if (!parsed?.[3]) {
       dateStr = dateStr.replaceAll("janvier", "").replaceAll("january", "")
+    }
+    if (parsed[1]) {
+      dateStr = this.messages.question.circa(dateStr)
     }
     return dateStr
   }

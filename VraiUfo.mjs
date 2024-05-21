@@ -176,7 +176,7 @@ export class VraiUfo {
     if (pickedCase.place) {
       str.push(pickedCase.place)
     }
-    this.name.textContent = pickedCase.title
+    this.name.innerHTML = `<a href="${pickedCase.url}">${pickedCase.title}</a>`
     this.description.textContent = str.join(", ")
   }
 

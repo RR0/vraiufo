@@ -30,9 +30,8 @@
 
   import("./lang/Messages_" + lang + ".mjs").then(messages => {
     const vraiUFO = new VraiUfo(messages.default, new URL("https://rr0.org"))
-    const caseIndex = new URLSearchParams(location.search).get("caseIndex")
-    const caseNumber = caseIndex ? parseInt(caseIndex, 10) : undefined
-    vraiUFO.init("casesDirs.json", "peopleDirs.json", caseNumber).then(() => {
+    const caseIndex = window.location.hash?.substring(1)
+    vraiUFO.init("casesDirs.json", "peopleDirs.json", caseIndex).then(() => {
       window.vraiUFO = vraiUFO
     })
   })

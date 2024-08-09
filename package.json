@@ -1,13 +1,10 @@
 {
   "name": "vraiufo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vrai ou faux UFO ?",
   "type": "module",
   "scripts": {
-    "test": "testscript"
-  },
-  "dependencies": {
-    "@javarome/testscript": "^0.10.7"
+    "test": "node --test"
   },
   "keywords": [
     "ufo",

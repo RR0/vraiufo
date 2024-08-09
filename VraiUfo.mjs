@@ -87,6 +87,7 @@ export class VraiUfo {
     this.pickButton.textContent = this.messages.question.pick
     this.casesFiles = /** @type {string[]} */ await this.fetchArray(new URL(casesDirsUrl, this.baseUrl), "/case.json")
     this.peopleFiles = /** @type {string[]} */ await this.fetchArray(new URL(peopleDirsUrl, this.baseUrl), "/people.json")
+    caseIndex = caseIndex || Math.floor(Math.random() * this.casesFiles.length)
     return this.pickCase(caseIndex)
   }
 
@@ -125,16 +126,11 @@ export class VraiUfo {
   }
 
   /**
-   * @param {number} caseIndex
-   * @return {Promise<void>}
+   * @param {string} caseUrl
+   * @return Promise<Case>
    */
-  async pickCase(caseIndex = Math.floor(Math.random() * this.casesFiles.length)) {
-    this.pickButton.style.display = "none"
-    this.form.style.opacity = "1"
-    this.name.className = "name"
-    const caseUrl = this.casesFiles[caseIndex]
+  async fetchCase(caseUrl) {
     const pickedCase = this.pickedCase = await this.fetchJson(new URL(caseUrl, this.baseUrl))
-    console.debug(caseIndex, pickedCase)
     const caseFile = "/case.json"
     pickedCase.url = new URL(caseUrl.replace(caseFile, "/index.html"), this.baseUrl)
     if (!navigator.language.startsWith("fr") || !pickedCase.title) {
@@ -142,9 +138,24 @@ export class VraiUfo {
       titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
       pickedCase.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
     }
+    return pickedCase
+  }
+
+  /**
+   * @param {number} caseIndex
+   * @return {Promise<void>}
+   */
+  async pickCase(caseIndex = Math.floor(Math.random() * this.casesFiles.length)) {
+    this.pickButton.style.display = "none"
+    this.form.style.opacity = "1"
+    this.name.className = "name"
+    window.location.hash = caseIndex
+    const caseUrl = this.casesFiles[caseIndex]
+    const pickedCase = await this.fetchCase(caseUrl)
+    console.debug(caseIndex, pickedCase)
     const str = []
     const classification = pickedCase.classification
-    let imageHref = pickedCase.image
+    const imageHref = pickedCase.image
     if (classification) {
       const hynek = classification.hynek
       if (hynek) {
@@ -156,12 +167,16 @@ export class VraiUfo {
       }
     }
     this.image.firstElementChild?.remove()
-    imageHref = pickedCase.image
     if (imageHref) {
-      const img = document.createElement("img")
+      let img
+      if (imageHref.includes("youtube.com")) {
+        img = document.createElement("iframe")
+      } else {
+        img = document.createElement("img")
+        img.setAttribute("onclick",
+          `this.classList.contains('zoomed') ? document.exitFullscreen() && this.classList.toggle('zoomed', false): this.classList.toggle('zoomed', true) && this.requestFullscreen()`)
+      }
       img.src = new URL(imageHref, this.baseUrl).href
-      img.setAttribute("onclick",
-        `this.classList.contains('zoomed') ? document.exitFullscreen() && this.classList.toggle('zoomed', false): this.classList.toggle('zoomed', true) && this.requestFullscreen()`)
       this.image.append(img)
     }
     const time = pickedCase.time
@@ -180,17 +195,8 @@ export class VraiUfo {
     this.description.textContent = str.join(", ")
   }
 
-  /**
-   * @param {number} peopleIndex
-   * @return {Promise<void>}
-   */
-  async pickPeople(peopleIndex = Math.floor(Math.random() * this.peopleFiles.length)) {
-    this.pickButton.style.display = "none"
-    this.form.style.opacity = "1"
-    this.name.className = "name"
-    const peopleUrl = this.peopleFiles[peopleIndex]
+  async fetchPeople(peopleUrl) {
     const pickedPeople = this.pickedPeople = await this.fetchJson(new URL(peopleUrl, this.baseUrl))
-    console.debug(peopleIndex, pickedPeople)
     const peopleFile = "/people.json"
     pickedPeople.url = new URL(peopleUrl.replace(peopleFile, "/index.html"), this.baseUrl)
     if (!pickedPeople.title) {
@@ -198,21 +204,23 @@ export class VraiUfo {
       titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
       pickedPeople.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
     }
+    return pickedPeople
+  }
+
+  /**
+   * @param {number} peopleIndex
+   * @return Promise<void>
+   */
+  async pickPeople(peopleIndex = Math.floor(Math.random() * this.peopleFiles.length)) {
+    this.pickButton.style.display = "none"
+    this.form.style.opacity = "1"
+    this.name.className = "name"
+    const peopleUrl = this.peopleFiles[peopleIndex]
+    const pickedPeople = await this.fetchPeople(peopleUrl)
+    console.debug(peopleIndex, pickedPeople)
     const str = []
-    const classification = pickedPeople.classification
-    let imageHref = pickedPeople.image
-    if (classification) {
-      const hynek = classification.hynek
-      if (hynek) {
-        const hynekStr = this.messages.people.classification.hynek[hynek]
-        if (!imageHref) {
-          pickedPeople.image = hynekStr.image
-        }
-        str.push(hynekStr.title)
-      }
-    }
+    const imageHref = pickedPeople.image
     this.image.firstElementChild?.remove()
-    imageHref = pickedPeople.image
     if (imageHref) {
       let img
       if (imageHref.indexOf("youtube.com") > 0) {

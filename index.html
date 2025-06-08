@@ -30,10 +30,29 @@
 
   let langImport
   switch (lang) {
+    case "de":
+      langImport = import((`./lang/Messages_de.mjs`))
+      break
+    case "es":
+      langImport = import((`./lang/Messages_es.mjs`))
+      break
     case "fr":
       langImport = import((`./lang/Messages_fr.mjs`))
       break
+    case "it":
+      langImport = import((`./lang/Messages_it.mjs`))
+      break
+    case "no":
+      langImport = import((`./lang/Messages_no.mjs`))
+      break
+    case "pt":
+      langImport = import((`./lang/Messages_pt.mjs`))
+      break
+    case "sv":
+      langImport = import((`./lang/Messages_sv.mjs`))
+      break
     case "en":
+    default:
       langImport = import((`./lang/Messages_en.mjs`))
       break
   }

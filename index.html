@@ -28,7 +28,17 @@
   }
   import {VraiUfo} from "./VraiUfo.mjs"
 
-  import((`./lang/Messages_${lang}.mjs`)).then(messages => {
+  let langImport
+  laz
+  switch (lang) {
+    case "fr":
+      langImport = import((`./lang/Messages_fr.mjs`))
+      break
+    case "en":
+      langImport = import((`./lang/Messages_en.mjs`))
+      break
+  }
+  langImport.then(messages => {
     const vraiUFO = new VraiUfo(messages.default)
     const caseIndex = window.location.hash?.substring(1)
     vraiUFO.init(caseIndex).then(() => {

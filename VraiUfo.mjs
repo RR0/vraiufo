@@ -1,28 +1,22 @@
+import {RR0Case, RR0CaseCatalog, RR0Catalog} from "@rr0/case"
+
 export class VraiUfo {
   /**
-   * @member {string[]}
+   * @type RR0CaseCatalog
    */
-  casesFiles
-
+  cases
   /**
-   * @member {string[]}
+   * @type RR0Catalog
    */
-  peopleFiles
-
-  /**
-   * @readonly
-   * @member {URL}
-   */
-  baseUrl
+  catalog
 
   /**
    * @readonly
    * @member {Messages}
    */
   messages
-
   /**
-   * @member {Case}
+   * @member {RR0Case}
    */
   pickedCase
 
@@ -44,11 +38,10 @@ export class VraiUfo {
   /**
    *
    * @param {Messages} messages
-   * @param {URL} baseUrl
    */
-  constructor(messages, baseUrl) {
+  constructor(messages) {
     this.messages = messages
-    this.baseUrl = baseUrl
+    this.catalog = new RR0Catalog()
   }
 
   answer(value) {
@@ -69,11 +62,9 @@ export class VraiUfo {
 
   /**
    *
-   * @param {string} casesDirsUrl
-   * @param {string} peopleDirsUrl
    * @param {number} caseIndex
    */
-  async init(casesDirsUrl, peopleDirsUrl, caseIndex) {
+  async init(caseIndex) {
     this.name = document.querySelector("#question .name")
     this.description = document.querySelector("#question .description")
     this.score = document.querySelector("#question .score")
@@ -85,9 +76,8 @@ export class VraiUfo {
     this.form.append("?")
     this.pickButton = document.querySelector("#question .pick")
     this.pickButton.textContent = this.messages.question.pick
-    this.casesFiles = /** @type {string[]} */ await this.fetchArray(new URL(casesDirsUrl, this.baseUrl), "/case.json")
-    this.peopleFiles = /** @type {string[]} */ await this.fetchArray(new URL(peopleDirsUrl, this.baseUrl), "/people.json")
-    caseIndex = caseIndex || Math.floor(Math.random() * this.casesFiles.length)
+    this.cases = await this.catalog.getCases()
+    caseIndex = caseIndex || Math.floor(Math.random() * this.cases.files.length)
     return this.pickCase(caseIndex)
   }
 
@@ -104,54 +94,17 @@ export class VraiUfo {
   }
 
   /**
-   *
-   * @param {URL} url
-   * @param {string} suffix
-   * @template T
-   * @return {Promise<T[]>}
-   */
-  async fetchArray(url, suffix) {
-    const casesJson = await this.fetchJson(url)
-    return casesJson.map(dir => dir + suffix)
-  }
-
-  /**
-   * @param {URL} url
-   * @template T
-   * @return {Promise<T>}
-   */
-  async fetchJson(url) {
-    const casesResponse = await fetch(url, {headers: {"accept": "application/json"}})
-    return await casesResponse.json()
-  }
-
-  /**
-   * @param {string} caseUrl
-   * @return Promise<Case>
-   */
-  async fetchCase(caseUrl) {
-    const pickedCase = this.pickedCase = await this.fetchJson(new URL(caseUrl, this.baseUrl))
-    const caseFile = "/case.json"
-    pickedCase.url = new URL(caseUrl.replace(caseFile, "/index.html"), this.baseUrl)
-    if (!navigator.language.startsWith("fr") || !pickedCase.title) {
-      let titleFromUrl = caseUrl.substring(0, caseUrl.length - caseFile.length)
-      titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
-      pickedCase.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
-    }
-    return pickedCase
-  }
-
-  /**
    * @param {number} caseIndex
    * @return {Promise<void>}
    */
-  async pickCase(caseIndex = Math.floor(Math.random() * this.casesFiles.length)) {
+  async pickCase(caseIndex = Math.floor(Math.random() * this.cases.files.length)) {
     this.pickButton.style.display = "none"
     this.form.style.opacity = "1"
     this.name.className = "name"
-    window.location.hash = caseIndex
-    const caseUrl = this.casesFiles[caseIndex]
-    const pickedCase = await this.fetchCase(caseUrl)
+    window.location.hash = String(caseIndex)
+    const cases = this.cases.files
+    const caseUrl = cases[caseIndex]
+    const pickedCase = this.pickedCase = await this.cases.fetch(caseUrl)
     console.debug(caseIndex, pickedCase)
     const str = []
     const classification = pickedCase.classification
@@ -176,7 +129,7 @@ export class VraiUfo {
         img.setAttribute("onclick",
           `this.classList.contains('zoomed') ? document.exitFullscreen() && this.classList.toggle('zoomed', false): this.classList.toggle('zoomed', true) && this.requestFullscreen()`)
       }
-      img.src = new URL(imageHref, this.baseUrl).href
+      img.src = new URL(imageHref, this.cases.options.baseUrl).href
       this.image.append(img)
     }
     const time = pickedCase.time

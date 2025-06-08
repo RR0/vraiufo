@@ -28,10 +28,10 @@
   }
   import {VraiUfo} from "./VraiUfo.mjs"
 
-  import("./lang/Messages_" + lang + ".mjs").then(messages => {
-    const vraiUFO = new VraiUfo(messages.default, new URL("https://rr0.org"))
+  import((`./lang/Messages_${lang}.mjs`)).then(messages => {
+    const vraiUFO = new VraiUfo(messages.default)
     const caseIndex = window.location.hash?.substring(1)
-    vraiUFO.init("casesDirs.json", "peopleDirs.json", caseIndex).then(() => {
+    vraiUFO.init(caseIndex).then(() => {
       window.vraiUFO = vraiUFO
     })
   })

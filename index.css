@@ -16,7 +16,7 @@ body {
 }
 
 img {
-  max-height: 200px;
+  height: 200px;
   max-width: 100%;
   cursor: zoom-in;
 }

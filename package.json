@@ -1,6 +1,6 @@
 {
   "name": "vraiufo",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Vrai ou faux UFO ?",
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
     "@rr0/case": "^0.1.3"
   },
   "devDependencies": {
-    "vite": "^6.3.5"
+    "vite": "^8.1.5"
   },
   "keywords": [
     "ufo",

@@ -26,18 +26,9 @@ const messages_no = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Nattlys",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Daglig plate",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radar-Visuell",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Nattlys", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Daglig plate", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radar-Visuell", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Nærmøte av den første typen (nær observasjon)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_no = {
           title: "Nærmøte av den tredje typen (enhetsobservasjon)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "kidnapping",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Kontakt",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "kidnapping", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Kontakt", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "UFO-ARKIV",
+    fileLabel: "SAK",
+    unclassified: "IKKE\u00A0KLASSIFISERT",
+    evalKicker: "Vurdering av sak",
+    tTrue: "EKTE",
+    tOr: "eller",
+    tFalse: "FALSK",
+    ufoWord: "ufo",
+    intro: "Bløff, forveksling… eller en fortsatt uidentifisert sak? Du bestemmer.",
+    caseKicker: "Sak til vurdering",
+    loading: "Åpner saken…",
+    noVisual: "BEVIS — uten bilde",
+    accuracy: "Nøyaktighet",
+    streakLabel: "SERIE",
+    caseLink: "Se saken på RR0 →",
+    tagline: "observasjonsarkiv"
   }
 }
 export default messages_no

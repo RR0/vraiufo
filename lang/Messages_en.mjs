@@ -8,7 +8,7 @@ const messages_en = {
     circa: (date) => "circa " + date
   },
   answer: {
-    correct: "✔ Correct !",
+    correct: "✔ Correct !",
     incorrect: "✘ Wrong",
     conclusion: {
       hoax: "This was a hoax",
@@ -26,18 +26,9 @@ const messages_en = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Nocturnal Light",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Daylight Disc",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radar-Visual",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Nocturnal Light", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Daylight Disc", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radar-Visual", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Close Encounter of the 1st kind (close sight)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_en = {
           title: "Close Encounter of the 3rd kind (entity sighted)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Abduction",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Contact",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Abduction", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Contact", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "UFO ARCHIVES",
+    fileLabel: "FILE",
+    unclassified: "UNCLASSIFIED",
+    evalKicker: "Case assessment",
+    tTrue: "TRUE",
+    tOr: "or",
+    tFalse: "FALSE",
+    ufoWord: "ufo",
+    intro: "Hoax, misidentification… or a still-unidentified case? You decide.",
+    caseKicker: "Case under review",
+    loading: "Opening the file…",
+    noVisual: "EXHIBIT — no visual",
+    accuracy: "Accuracy",
+    streakLabel: "STREAK",
+    caseLink: "Read the full case on RR0 →",
+    tagline: "observation archives"
   }
 }
 export default messages_en

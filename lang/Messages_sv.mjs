@@ -8,7 +8,7 @@ const messages_sv = {
     circa: (date) => "runt " + date
   },
   answer: {
-    correct: "✔ Exakt !",
+    correct: "✔ Exakt !",
     incorrect: "✘ Felaktig",
     conclusion: {
       hoax: "Det var en bluff",
@@ -26,18 +26,9 @@ const messages_sv = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Nattlampa",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Dagskiva",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Visuell-radar",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Nattlampa", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Dagskiva", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Visuell-radar", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Nära möte av 1:a typen (nära observation)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_sv = {
           title: "Nära möte av den tredje typen (observerad enhet)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Kidnappning",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Kontakt",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Kidnappning", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Kontakt", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "UFO-ARKIV",
+    fileLabel: "AKT",
+    unclassified: "EJ\u00A0KLASSIFICERAD",
+    evalKicker: "Bedömning av fall",
+    tTrue: "ÄKTA",
+    tOr: "eller",
+    tFalse: "FALSK",
+    ufoWord: "ufo",
+    intro: "Bluff, förväxling… eller ett ännu oidentifierat fall? Du bestämmer.",
+    caseKicker: "Fall under granskning",
+    loading: "Öppnar akten…",
+    noVisual: "BEVIS — utan bild",
+    accuracy: "Precision",
+    streakLabel: "SVIT",
+    caseLink: "Se fallet på RR0 →",
+    tagline: "observationsarkiv"
   }
 }
 export default messages_sv

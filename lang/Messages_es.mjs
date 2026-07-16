@@ -9,7 +9,7 @@ const messages_es = {
   },
   answer: {
     correct: "✔ ¡Exacto!",
-    incorrect: "✘ Oh, no !",
+    incorrect: "✘ Oh, no !",
     conclusion: {
       hoax: "Fue un engaño",
       misinterpretation: "Fue un error",
@@ -26,18 +26,9 @@ const messages_es = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Luz de Noche",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Disco Diurno",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radar-Visual",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Luz de Noche", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Disco Diurno", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radar-Visual", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Encuentro cercano del 1er tipo (observación cercana)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_es = {
           title: "Encuentro cercano del tercer tipo (observación de entidad)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Secuestro",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Contacto",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Secuestro", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Contacto", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "ARCHIVOS OVNI",
+    fileLabel: "EXPEDIENTE",
+    unclassified: "NO\u00A0CLASIFICADO",
+    evalKicker: "Evaluación del caso",
+    tTrue: "REAL",
+    tOr: "o",
+    tFalse: "FALSO",
+    ufoWord: "ovni",
+    intro: "¿Engaño, confusión… o un caso aún sin identificar? Tú decides.",
+    caseKicker: "Caso bajo revisión",
+    loading: "Abriendo el expediente…",
+    noVisual: "PRUEBA — sin imagen",
+    accuracy: "Precisión",
+    streakLabel: "RACHA",
+    caseLink: "Ver el expediente en RR0 →",
+    tagline: "archivos de observaciones"
   }
 }
 export default messages_es

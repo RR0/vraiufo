@@ -8,8 +8,8 @@ const messages_de = {
     circa: (date) => "etwa im " + date
   },
   answer: {
-    correct: "✔ Genau !",
-    incorrect: "✘ Ach nein !",
+    correct: "✔ Genau !",
+    incorrect: "✘ Ach nein !",
     conclusion: {
       hoax: "Es war ein Scherz",
       misinterpretation: "Es war ein Fehler",
@@ -26,18 +26,9 @@ const messages_de = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Nachtlicht",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Tagesscheibe",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radarvisuell",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Nachtlicht", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Tagesscheibe", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radarvisuell", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Unheimliche Begegnung des 1. Typs (nahe Beobachtung)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_de = {
           title: "Unheimliche Begegnung des 3. Typs (Entitätsbeobachtung)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Entführung",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Kontakt",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Entführung", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Kontakt", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "UFO-ARCHIV",
+    fileLabel: "AKTE",
+    unclassified: "NICHT\u00A0KLASSIFIZIERT",
+    evalKicker: "Fallbewertung",
+    tTrue: "ECHT",
+    tOr: "oder",
+    tFalse: "FALSCH",
+    ufoWord: "ufo",
+    intro: "Scherz, Verwechslung… oder ein noch nicht identifizierter Fall? Sie entscheiden.",
+    caseKicker: "Fall in Prüfung",
+    loading: "Akte wird geöffnet…",
+    noVisual: "BEWEISSTÜCK — ohne Bild",
+    accuracy: "Genauigkeit",
+    streakLabel: "SERIE",
+    caseLink: "Den Fall auf RR0 ansehen →",
+    tagline: "Beobachtungsarchiv"
   }
 }
 export default messages_de

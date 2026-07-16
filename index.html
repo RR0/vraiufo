@@ -3,24 +3,16 @@
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <title>Vraiufo</title>
-  <link href="index.css" rel="stylesheet"/>
-  <link href="title.css" rel="stylesheet"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Barlow+Condensed:wght@500;600;700&display=swap"
+      rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
 </head>
 <body>
-<h1 class="title">
-  <span class="vrai">vrai</span><span class="ou">u</span><span class="f">f</span><span class="o">o</span><span
-    class="aux">aux</span><span class="qm">?</span>
-</h1>
-<div id="question">
-  <h2 class="name"></h2>
-  <p class="description"></p>
-  <div class="image"><img alt="Illustration" src=""/></div>
-  <button class="pick" onclick="vraiUFO.pickCase()"></button>
-  <div class="options"></div>
-  <p class="score"></p>
-</div>
-</body>
+<main class="desk" id="app"></main>
 <script type="module">
   let lang = navigator.language.substring(0, 2)
   if (!["de", "en", "es", "fr", "it", "no", "pt", "sv"].includes(lang)) {
@@ -31,29 +23,29 @@
   let langImport
   switch (lang) {
     case "de":
-      langImport = import((`./lang/Messages_de.mjs`))
+      langImport = import("./lang/Messages_de.mjs")
       break
     case "es":
-      langImport = import((`./lang/Messages_es.mjs`))
+      langImport = import("./lang/Messages_es.mjs")
       break
     case "fr":
-      langImport = import((`./lang/Messages_fr.mjs`))
+      langImport = import("./lang/Messages_fr.mjs")
       break
     case "it":
-      langImport = import((`./lang/Messages_it.mjs`))
+      langImport = import("./lang/Messages_it.mjs")
       break
     case "no":
-      langImport = import((`./lang/Messages_no.mjs`))
+      langImport = import("./lang/Messages_no.mjs")
       break
     case "pt":
-      langImport = import((`./lang/Messages_pt.mjs`))
+      langImport = import("./lang/Messages_pt.mjs")
       break
     case "sv":
-      langImport = import((`./lang/Messages_sv.mjs`))
+      langImport = import("./lang/Messages_sv.mjs")
       break
     case "en":
     default:
-      langImport = import((`./lang/Messages_en.mjs`))
+      langImport = import("./lang/Messages_en.mjs")
       break
   }
   langImport.then(messages => {
@@ -67,4 +59,5 @@
 <script nomodule>
   alert("This website requires a modern browser")
 </script>
+</body>
 </html>

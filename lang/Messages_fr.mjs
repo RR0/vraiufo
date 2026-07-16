@@ -8,8 +8,8 @@ const messages_fr = {
     circa: (date) => "vers " + date
   },
   answer: {
-    correct: "✔ Exact !",
-    incorrect: "✘ Eh non !",
+    correct: "✔ Exact !",
+    incorrect: "✘ Eh non !",
     conclusion: {
       hoax: "C'était un canular",
       misinterpretation: "C'était une méprise",
@@ -26,18 +26,9 @@ const messages_fr = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Lumière Nocturne",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Disque Diurne",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radar-Visuel",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Lumière Nocturne", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Disque Diurne", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radar-Visuel", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Rencontre Rapprochée du 1er type (observation proche)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_fr = {
           title: "Rencontre Rapprochée du 3ᵉ type (observation d'entité)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Enlèvement",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Contact",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Enlèvement", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Contact", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "ARCHIVES OVNI",
+    fileLabel: "DOSSIER",
+    unclassified: "NON\u00A0CLASSÉ",
+    evalKicker: "Évaluation de cas",
+    tTrue: "VRAI",
+    tOr: "ou",
+    tFalse: "FAUX",
+    ufoWord: "ovni",
+    intro: "Canular, méprise… ou cas toujours non identifié\u00A0? À vous de trancher.",
+    caseKicker: "Cas soumis à expertise",
+    loading: "Ouverture du dossier…",
+    noVisual: "PIÈCE À CONVICTION — sans visuel",
+    accuracy: "Précision",
+    streakLabel: "SÉRIE",
+    caseLink: "Consulter le dossier sur RR0 →",
+    tagline: "archives d'observations"
   }
 }
 export default messages_fr

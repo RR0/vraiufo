@@ -1,204 +1,209 @@
-import {RR0Case, RR0CaseCatalog, RR0Catalog} from "@rr0/case"
+import {RR0Catalog} from "@rr0/case"
 
 export class VraiUfo {
   /**
-   * @type RR0CaseCatalog
-   */
-  cases
-  /**
-   * @type RR0Catalog
-   */
-  catalog
-
-  /**
-   * @readonly
-   * @member {Messages}
-   */
-  messages
-  /**
-   * @member {RR0Case}
-   */
-  pickedCase
-
-  /**
-   * @member {People}
-   */
-  pickedPeople
-
-  /**
-   * @member {number}
-   */
-  counter = 0
-
-  /**
-   * @member {number}
-   */
-  correctAnswersCount = 0
-
-  /**
-   *
-   * @param {Messages} messages
+   * @param {Object} messages  The localized Messages_<lang> object (incl. its `ui` block).
    */
   constructor(messages) {
     this.messages = messages
+    this.ui = messages.ui
+    this.locale = navigator.language
     this.catalog = new RR0Catalog()
+    this.score = 0
+    this.count = 0
+    this.streak = 0
+    this.answered = false
+  }
+
+  /**
+   * @param {number|string} [caseIndex]
+   */
+  async init(caseIndex) {
+    this.buildShell()
+    this.cases = await this.catalog.getCases()
+    let idx = Number(caseIndex)
+    if (!Number.isInteger(idx) || idx < 0 || idx >= this.cases.files.length) {
+      idx = Math.floor(Math.random() * this.cases.files.length)
+    }
+    return this.pickCase(idx)
+  }
+
+  buildShell() {
+    const ui = this.ui
+    const root = document.getElementById("app")
+    root.innerHTML = `
+      <div class="frame">
+        <div class="folder">
+          <div class="folder__top">
+            <div class="ref">${ui.archives}<br><span class="ref__no">${ui.fileLabel} <span data-ref="caseNo"></span></span></div>
+            <div class="stamp stamp--red">${ui.unclassified}</div>
+          </div>
+          <div class="kicker kicker--eval">${ui.evalKicker}</div>
+          <h1 class="title"><span class="t-true">${ui.tTrue}</span> <span class="t-or">${ui.tOr}</span> <span class="t-false">${ui.tFalse}</span> <span class="t-ufo">${ui.ufoWord} ?</span></h1>
+          <p class="intro">${ui.intro}</p>
+          <div class="divider"></div>
+          <div class="loading" data-ref="loading">${ui.loading}</div>
+          <div class="case" data-ref="case" hidden>
+            <div class="kicker">${ui.caseKicker}</div>
+            <h2 class="name" data-ref="name"></h2>
+            <div class="meta" data-ref="meta"></div>
+            <div class="photo">
+              <span class="tape tape--l"></span><span class="tape tape--r"></span>
+              <div class="photo__inner" data-ref="photo"></div>
+            </div>
+            <div class="options" data-ref="options">
+              <button class="pick-true" data-ref="trueBtn">${ui.tTrue} ${ui.ufoWord}</button>
+              <button class="pick-false" data-ref="falseBtn">${ui.tFalse} ${ui.ufoWord}</button>
+            </div>
+            <div class="verdict" data-ref="verdict" hidden>
+              <div class="verdict__stamp" data-ref="verdictStamp"></div>
+              <p class="conclusion" data-ref="conclusion"></p>
+              <a class="case-link" data-ref="caseLink" target="_blank" rel="noopener"></a>
+              <button class="another" data-ref="another">${this.messages.question.pick}</button>
+            </div>
+          </div>
+          <div class="scorebar">
+            <span>${ui.accuracy} <b data-ref="pct">0</b> % \u00B7 <span data-ref="good">0</span>/<span data-ref="total">0</span></span>
+            <span class="streak" data-ref="streak" hidden><span>${ui.streakLabel}</span> <span data-ref="streakVal"></span></span>
+          </div>
+        </div>
+        <div class="foot">vraiufo.com \u2014 ${ui.tagline}</div>
+      </div>
+    `
+    this.el = {}
+    root.querySelectorAll("[data-ref]").forEach(node => {
+      this.el[node.dataset.ref] = node
+    })
+    this.el.trueBtn.addEventListener("click", () => this.answer("true"))
+    this.el.falseBtn.addEventListener("click", () => this.answer("false"))
+    this.el.another.addEventListener("click", () => this.pickCase())
+  }
+
+  /**
+   * @param {number} [caseIndex]
+   */
+  async pickCase(caseIndex = Math.floor(Math.random() * this.cases.files.length)) {
+    this.currentIndex = caseIndex
+    window.location.hash = String(caseIndex)
+    this.answered = false
+    this.el.loading.hidden = false
+    this.el.case.hidden = true
+    const caseUrl = this.cases.files[caseIndex]
+    const pickedCase = this.pickedCase = await this.cases.fetch(caseUrl)
+    this.render(pickedCase)
+    this.el.loading.hidden = true
+    this.el.case.hidden = false
+  }
+
+  render(pickedCase) {
+    this.el.verdict.hidden = true
+    this.el.options.hidden = false
+    this.el.caseNo.textContent = "#" + String(this.currentIndex + 1).padStart(4, "0")
+
+    let imageHref = pickedCase.image
+    let classifTitle = null
+    const classification = pickedCase.classification
+    if (classification && classification.hynek) {
+      const hynek = this.messages.case.classification.hynek[classification.hynek]
+      if (hynek) {
+        classifTitle = hynek.title
+        if (!imageHref) imageHref = hynek.image
+      }
+    }
+
+    const photo = this.el.photo
+    photo.textContent = ""
+    if (imageHref) {
+      if (imageHref.includes("youtube.com")) {
+        const iframe = document.createElement("iframe")
+        iframe.className = "media"
+        iframe.src = imageHref
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        iframe.allowFullscreen = true
+        photo.append(iframe)
+      } else {
+        const img = document.createElement("img")
+        img.className = "media"
+        img.alt = "Illustration"
+        img.src = new URL(imageHref, this.cases.options.baseUrl).href
+        img.addEventListener("click", () => {
+          if (document.fullscreenElement) document.exitFullscreen()
+          else img.requestFullscreen?.()
+        })
+        photo.append(img)
+      }
+    } else {
+      const ph = document.createElement("div")
+      ph.className = "placeholder"
+      const span = document.createElement("span")
+      span.textContent = this.ui.noVisual
+      ph.append(span)
+      photo.append(ph)
+    }
+
+    const parts = []
+    if (classifTitle) parts.push(classifTitle)
+    const time = pickedCase.time
+    if (time) {
+      const seg = time.split("/")
+      if (seg.length > 1) parts.push(this.messages.question.between(this.dateStr(seg[0]), this.dateStr(seg[1])))
+      else parts.push(this.dateStr(time))
+    }
+    if (pickedCase.place) parts.push(pickedCase.place)
+
+    this.el.name.textContent = pickedCase.title
+    this.el.meta.textContent = parts.filter(Boolean).join(" \u00B7 ")
   }
 
   answer(value) {
-    const answerMessages = this.messages.answer
+    if (this.answered) return
+    this.answered = true
     const conclusion = this.pickedCase.conclusion || "unknown"
     const unknownAndTrue = conclusion === "unknown" && value === "true"
     const explainedAndFalse = conclusion !== "unknown" && value === "false"
     const correct = unknownAndTrue || explainedAndFalse
-    this.form.style.opacity = "0"
-    this.pickButton.style.display = "inline-block"
-    this.correctAnswersCount += correct ? 1 : 0
-    this.name.classList.add(correct ? "true" : "false")
-    this.counter++
-    this.score.innerHTML = answerMessages.result(this.correctAnswersCount, this.counter)
-    this.name.textContent = answerMessages[correct ? "correct" : "incorrect"]
-    this.description.innerHTML = `<a href="${this.pickedCase.url}">${answerMessages.conclusion[conclusion]}</a>`
+
+    this.count++
+    if (correct) {
+      this.score++
+      this.streak++
+    } else {
+      this.streak = 0
+    }
+
+    this.el.options.hidden = true
+    this.el.verdict.hidden = false
+
+    const stamp = this.el.verdictStamp
+    stamp.textContent = correct ? this.messages.answer.correct : this.messages.answer.incorrect
+    stamp.classList.toggle("is-true", correct)
+    stamp.classList.toggle("is-false", !correct)
+    stamp.style.animation = "none"
+    void stamp.offsetWidth
+    stamp.style.animation = ""
+
+    const answerMessages = this.messages.answer
+    this.el.conclusion.textContent = answerMessages.conclusion[conclusion]
+    this.el.caseLink.href = this.pickedCase.url
+    this.el.caseLink.textContent = this.ui.caseLink
+
+    this.updateScore()
   }
 
-  /**
-   *
-   * @param {number} caseIndex
-   */
-  async init(caseIndex) {
-    this.name = document.querySelector("#question .name")
-    this.description = document.querySelector("#question .description")
-    this.score = document.querySelector("#question .score")
-    this.image = document.querySelector("#question .image")
-    this.form = document.querySelector("#question .options")
-    this.form.append(this.createButton("true"))
-    this.form.append(this.messages.question.or)
-    this.form.append(this.createButton("false"))
-    this.form.append("?")
-    this.pickButton = document.querySelector("#question .pick")
-    this.pickButton.textContent = this.messages.question.pick
-    this.cases = await this.catalog.getCases()
-    caseIndex = caseIndex || Math.floor(Math.random() * this.cases.files.length)
-    return this.pickCase(caseIndex)
-  }
-
-  /**
-   * @param {string} clazz
-   * @return {HTMLButtonElement}
-   */
-  createButton(clazz) {
-    const button = document.createElement("button")
-    button.className = clazz
-    button.innerHTML = this.messages.question[clazz]
-    button.addEventListener("click", () => this.answer(clazz))
-    return button
-  }
-
-  /**
-   * @param {number} caseIndex
-   * @return {Promise<void>}
-   */
-  async pickCase(caseIndex = Math.floor(Math.random() * this.cases.files.length)) {
-    this.pickButton.style.display = "none"
-    this.form.style.opacity = "1"
-    this.name.className = "name"
-    window.location.hash = String(caseIndex)
-    const cases = this.cases.files
-    const caseUrl = cases[caseIndex]
-    const pickedCase = this.pickedCase = await this.cases.fetch(caseUrl)
-    console.debug(caseIndex, pickedCase)
-    const str = []
-    const classification = pickedCase.classification
-    const imageHref = pickedCase.image
-    if (classification) {
-      const hynek = classification.hynek
-      if (hynek) {
-        const hynekStr = this.messages.case.classification.hynek[hynek]
-        if (!imageHref) {
-          pickedCase.image = hynekStr.image
-        }
-        str.push(hynekStr.title)
-      }
+  updateScore() {
+    const pct = this.count ? (this.score / this.count * 100).toLocaleString(this.locale, {
+      maximumFractionDigits: 1,
+      useGrouping: false
+    }) : "0"
+    this.el.pct.textContent = pct
+    this.el.good.textContent = String(this.score)
+    this.el.total.textContent = String(this.count)
+    if (this.streak > 1) {
+      this.el.streak.hidden = false
+      this.el.streakVal.textContent = "\u00D7" + this.streak
+    } else {
+      this.el.streak.hidden = true
     }
-    this.image.firstElementChild?.remove()
-    if (imageHref) {
-      let img
-      if (imageHref.includes("youtube.com")) {
-        img = document.createElement("iframe")
-      } else {
-        img = document.createElement("img")
-        img.setAttribute("onclick",
-          `this.classList.contains('zoomed') ? document.exitFullscreen() && this.classList.toggle('zoomed', false): this.classList.toggle('zoomed', true) && this.requestFullscreen()`)
-      }
-      img.src = new URL(imageHref, this.cases.options.baseUrl).href
-      this.image.append(img)
-    }
-    const time = pickedCase.time
-    if (time) {
-      const parts = time.split("/")
-      if (parts.length > 1) {
-        str.push(this.messages.question.between(this.dateStr(parts[0]), this.dateStr(parts[1])))
-      } else {
-        str.push(this.dateStr(time))
-      }
-    }
-    if (pickedCase.place) {
-      str.push(pickedCase.place)
-    }
-    this.name.textContent = pickedCase.title
-    this.description.textContent = str.join(", ")
-  }
-
-  async fetchPeople(peopleUrl) {
-    const pickedPeople = this.pickedPeople = await this.fetchJson(new URL(peopleUrl, this.baseUrl))
-    const peopleFile = "/people.json"
-    pickedPeople.url = new URL(peopleUrl.replace(peopleFile, "/index.html"), this.baseUrl)
-    if (!pickedPeople.title) {
-      let titleFromUrl = peopleUrl.substring(0, peopleUrl.length - peopleFile.length)
-      titleFromUrl = titleFromUrl.substring(titleFromUrl.lastIndexOf("/") + 1)
-      pickedPeople.title = titleFromUrl.replaceAll(/([a-z0-9])([A-Z0-9])/g, "$1 $2").trim()
-    }
-    return pickedPeople
-  }
-
-  /**
-   * @param {number} peopleIndex
-   * @return Promise<void>
-   */
-  async pickPeople(peopleIndex = Math.floor(Math.random() * this.peopleFiles.length)) {
-    this.pickButton.style.display = "none"
-    this.form.style.opacity = "1"
-    this.name.className = "name"
-    const peopleUrl = this.peopleFiles[peopleIndex]
-    const pickedPeople = await this.fetchPeople(peopleUrl)
-    console.debug(peopleIndex, pickedPeople)
-    const str = []
-    const imageHref = pickedPeople.image
-    this.image.firstElementChild?.remove()
-    if (imageHref) {
-      let img
-      if (imageHref.indexOf("youtube.com") > 0) {
-        img = document.createElement("div")
-        img.innerHTML = `<iframe width="560" height="315" src="${imageHref}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-      } else {
-        img = document.createElement("img")
-        img.src = new URL(imageHref, this.baseUrl).href
-      }
-      this.image.append(img)
-    }
-    const time = pickedPeople.time
-    if (time) {
-      const parts = time.split("/")
-      if (parts.length > 1) {
-        str.push(this.dateStr(parts[0]) + " à " + this.dateStr(parts[1]))
-      } else {
-        str.push(this.dateStr(time))
-      }
-    }
-    if (pickedPeople.place) {
-      str.push(pickedPeople.place)
-    }
-    this.name.textContent = pickedPeople.title
-    this.description.textContent = str.join(", ")
   }
 
   /**
@@ -207,12 +212,12 @@ export class VraiUfo {
    */
   dateStr(time) {
     const date = new Date(time.replaceAll("~", ""))
-    let dateStr = date.toLocaleDateString(navigator.language, {month: "long", year: "numeric"})
+    let dateStr = date.toLocaleDateString(this.locale, {month: "long", year: "numeric"})
     const parsed = /(~)?(\d\d\d\d)(?:-(\d\d)(?:-(?:(\d\d) (~)?(\d\d:\d\d)))?)?/.exec(time)
     if (!parsed?.[3]) {
-      dateStr = dateStr.replaceAll("janvier", "").replaceAll("january", "")
+      dateStr = dateStr.replace(/[\p{L}.]+\s+(?=\d)/u, "").trim()
     }
-    if (parsed[1]) {
+    if (parsed?.[1]) {
       dateStr = this.messages.question.circa(dateStr)
     }
     return dateStr

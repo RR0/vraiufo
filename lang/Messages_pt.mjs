@@ -26,18 +26,9 @@ const messages_pt = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Luz Noturna",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Disco Diurno",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radar-Visual",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Luz Noturna", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Disco Diurno", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radar-Visual", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Encontro Imediato do 1º tipo (observação atenta)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_pt = {
           title: "Encontro Imediato do 3º tipo (observação de entidade)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Sequestro",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Contacto",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Sequestro", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Contacto", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "ARQUIVOS OVNI",
+    fileLabel: "PROCESSO",
+    unclassified: "NÃO\u00A0CLASSIFICADO",
+    evalKicker: "Avaliação do caso",
+    tTrue: "REAL",
+    tOr: "ou",
+    tFalse: "FALSO",
+    ufoWord: "ovni",
+    intro: "Farsa, engano… ou um caso ainda não identificado? Você decide.",
+    caseKicker: "Caso em análise",
+    loading: "Abrindo o processo…",
+    noVisual: "PROVA — sem imagem",
+    accuracy: "Precisão",
+    streakLabel: "SEQUÊNCIA",
+    caseLink: "Ver o processo no RR0 →",
+    tagline: "arquivos de observações"
   }
 }
 export default messages_pt

@@ -8,7 +8,7 @@ const messages_it = {
     circa: (date) => "intorno a " + date
   },
   answer: {
-    correct: "✔ Giusto !",
+    correct: "✔ Giusto !",
     incorrect: "✘ Sbagliato",
     conclusion: {
       hoax: "Era una bufala",
@@ -26,18 +26,9 @@ const messages_it = {
   case: {
     classification: {
       hynek: {
-        NL: {
-          title: "Luce Notturna",
-          image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"
-        },
-        DD: {
-          title: "Disco Diurno",
-          image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"
-        },
-        RV: {
-          title: "Radar-Visivo",
-          image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"
-        },
+        NL: {title: "Luce Notturna", image: "/science/crypto/ufo/observation/classification/hynek/ln/Logo.jpg"},
+        DD: {title: "Disco Diurno", image: "/science/crypto/ufo/observation/classification/hynek/dd/Logo.jpg"},
+        RV: {title: "Radar-Visivo", image: "/science/crypto/ufo/observation/classification/hynek/rv/Logo.jpg"},
         CE1: {
           title: "Incontro ravvicinato del 1° tipo (vista da vicino)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/1/Logo.jpg"
@@ -50,16 +41,28 @@ const messages_it = {
           title: "Incontro ravvicinato del 3° tipo (entità osservata)",
           image: "/science/crypto/ufo/observation/classification/hynek/rr/3/Logo.jpg"
         },
-        CE4: {
-          title: "Rapimento",
-          image: "/time/1/9/3/5/06/AstoundingStories.jpg"
-        },
-        CE5: {
-          title: "Contatto",
-          image: "/people/v/VorilhonClaude/rael1.jpg"
-        }
+        CE4: {title: "Rapimento", image: "/time/1/9/3/5/06/AstoundingStories.jpg"},
+        CE5: {title: "Contatto", image: "/people/v/VorilhonClaude/rael1.jpg"}
       }
     }
+  },
+  ui: {
+    archives: "ARCHIVI UFO",
+    fileLabel: "FASCICOLO",
+    unclassified: "NON\u00A0CLASSIFICATO",
+    evalKicker: "Valutazione del caso",
+    tTrue: "VERO",
+    tOr: "o",
+    tFalse: "FALSO",
+    ufoWord: "ufo",
+    intro: "Bufala, errore… o un caso ancora non identificato? Decidi tu.",
+    caseKicker: "Caso in esame",
+    loading: "Apertura del fascicolo…",
+    noVisual: "REPERTO — senza immagine",
+    accuracy: "Precisione",
+    streakLabel: "SERIE",
+    caseLink: "Vedi il fascicolo su RR0 →",
+    tagline: "archivi di osservazioni"
   }
 }
 export default messages_it

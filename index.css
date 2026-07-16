@@ -67,7 +67,6 @@ a:hover {
   font-family: "Special Elite", monospace;
   letter-spacing: .1em;
 }
-
 .stamp--red {
   border: 2.5px solid #a8321f;
   color: #a8321f;
@@ -157,7 +156,6 @@ a:hover {
   position: relative;
   margin: 18px 0 4px;
 }
-
 .tape {
   position: absolute;
   top: -9px;
@@ -210,7 +208,6 @@ img.media:fullscreen {
   align-items: flex-end;
   justify-content: center;
 }
-
 .placeholder span {
   font-size: 12px;
   letter-spacing: .1em;
@@ -265,7 +262,6 @@ img.media:fullscreen {
   align-items: center;
   gap: 12px;
 }
-
 .verdict__stamp {
   border: 3px solid;
   font-family: "Special Elite", monospace;
@@ -370,7 +366,6 @@ img.media:fullscreen {
     opacity: 1;
   }
 }
-
 @keyframes blinkOp {
   0%, 60% {
     opacity: 1;

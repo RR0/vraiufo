@@ -98,7 +98,7 @@ export class VraiUfo {
   render(pickedCase) {
     this.el.verdict.hidden = true
     this.el.options.hidden = false
-    this.el.caseNo.textContent = "#" + String(this.currentIndex + 1).padStart(4, "0")
+    this.el.caseNo.textContent = "#" + String(this.currentIndex).padStart(4, "0")
 
     let imageHref = pickedCase.image
     let classifTitle = null

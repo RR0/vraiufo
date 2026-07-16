@@ -56,12 +56,13 @@ const messages_de = {
     tFalse: "FALSCH",
     ufoWord: "ufo",
     intro: "Scherz, Verwechslung… oder ein noch nicht identifizierter Fall? Sie entscheiden.",
-    caseKicker: "Fall in Prüfung",
+    caseKicker: "Akte {n} in Prüfung",
     loading: "Akte wird geöffnet…",
     noVisual: "BEWEISSTÜCK — ohne Bild",
     accuracy: "Genauigkeit",
     streakLabel: "SERIE",
     caseLink: "Den Fall auf RR0 ansehen →",
+    stampLabel: {hoax: "Scherz", misinterpretation: "Verwechslung", unknown: "Unidentifiziert"},
     tagline: "Beobachtungsarchiv"
   }
 }

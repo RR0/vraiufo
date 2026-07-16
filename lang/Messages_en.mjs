@@ -56,12 +56,13 @@ const messages_en = {
     tFalse: "FALSE",
     ufoWord: "ufo",
     intro: "Hoax, misidentification… or a still-unidentified case? You decide.",
-    caseKicker: "Case under review",
+    caseKicker: "File {n} under review",
     loading: "Opening the file…",
     noVisual: "EXHIBIT — no visual",
     accuracy: "Accuracy",
     streakLabel: "STREAK",
     caseLink: "Read the full case on RR0 →",
+    stampLabel: {hoax: "Hoax", misinterpretation: "Misidentified", unknown: "Unidentified"},
     tagline: "observation archives"
   }
 }

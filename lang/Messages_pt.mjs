@@ -56,12 +56,13 @@ const messages_pt = {
     tFalse: "FALSO",
     ufoWord: "ovni",
     intro: "Farsa, engano… ou um caso ainda não identificado? Você decide.",
-    caseKicker: "Caso em análise",
+    caseKicker: "Processo {n} em análise",
     loading: "Abrindo o processo…",
     noVisual: "PROVA — sem imagem",
     accuracy: "Precisão",
     streakLabel: "SEQUÊNCIA",
     caseLink: "Ver o processo no RR0 →",
+    stampLabel: {hoax: "Farsa", misinterpretation: "Engano", unknown: "Não identificado"},
     tagline: "arquivos de observações"
   }
 }

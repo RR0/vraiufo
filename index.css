@@ -67,13 +67,33 @@ a:hover {
   font-family: "Special Elite", monospace;
   letter-spacing: .1em;
 }
-.stamp--red {
+
+.stamp--pre {
   border: 2.5px solid #a8321f;
   color: #a8321f;
-  font-size: 14px;
-  padding: 6px 11px;
+  font-size: 13px;
+  padding: 5px 10px;
   transform: rotate(6deg);
   opacity: .82;
+  white-space: nowrap;
+}
+
+.stamp--done {
+  border: 3px solid;
+  font-size: 14px;
+  padding: 5px 12px;
+  white-space: nowrap;
+  animation: stampIn .5s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+
+.stamp--done.is-true {
+  color: #2e6b30;
+  border-color: #2e6b30;
+}
+
+.stamp--done.is-false {
+  color: #a8321f;
+  border-color: #a8321f;
 }
 
 .kicker {
@@ -86,7 +106,7 @@ a:hover {
 }
 
 .kicker--eval {
-  margin-top: 18px;
+  margin-top: 0;
 }
 
 .title {
@@ -125,7 +145,7 @@ a:hover {
 .divider {
   height: 0;
   border-bottom: 2px dashed #9a917a;
-  margin: 20px 0;
+  margin: 10px 0 20px;
 }
 
 .loading {
@@ -139,11 +159,28 @@ a:hover {
 }
 
 .name {
-  margin: 4px 0 9px;
   font-family: "Special Elite", monospace;
   font-size: 27px;
   font-weight: 400;
   line-height: 1.2;
+}
+
+.name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 4px 0 9px;
+}
+
+.name-row .name {
+  margin: 0;
+  flex: 1;
+}
+
+.name-row .stamp {
+  flex-shrink: 0;
+  margin-top: -8px;
 }
 
 .meta {
@@ -260,34 +297,29 @@ img.media:fullscreen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-}
-.verdict__stamp {
-  border: 3px solid;
-  font-family: "Special Elite", monospace;
-  font-size: 28px;
-  letter-spacing: .06em;
-  padding: 7px 24px;
-  text-align: center;
-  animation: stampIn .5s cubic-bezier(.2, 1.4, .4, 1) both;
-}
-
-.verdict__stamp.is-true {
-  color: #2e6b30;
-  border-color: #2e6b30;
-}
-
-.verdict__stamp.is-false {
-  color: #a8321f;
-  border-color: #a8321f;
+  gap: 14px;
 }
 
 .conclusion {
-  margin: 2px 0 0;
-  font-size: 16px;
+  margin: 0;
+  font-size: 19px;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #3a3628;
+  text-wrap: pretty;
+}
+
+.verdict-word {
+  font-family: "Special Elite", monospace;
+  letter-spacing: .02em;
+}
+
+.verdict-word.is-true {
+  color: #2e6b30;
+}
+
+.verdict-word.is-false {
+  color: #a8321f;
 }
 
 .case-link {

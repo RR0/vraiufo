@@ -56,12 +56,13 @@ const messages_fr = {
     tFalse: "FAUX",
     ufoWord: "ovni",
     intro: "Canular, méprise… ou cas toujours non identifié\u00A0? À vous de trancher.",
-    caseKicker: "Cas soumis à expertise",
+    caseKicker: "Dossier {n} soumis à expertise",
     loading: "Ouverture du dossier…",
     noVisual: "PIÈCE À CONVICTION — sans visuel",
     accuracy: "Précision",
     streakLabel: "SÉRIE",
     caseLink: "Consulter le dossier sur RR0 →",
+    stampLabel: {hoax: "Canular", misinterpretation: "Méprise", unknown: "Non identifié"},
     tagline: "archives d'observations"
   }
 }

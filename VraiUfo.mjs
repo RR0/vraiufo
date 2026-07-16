@@ -21,7 +21,7 @@ export class VraiUfo {
   async init(caseIndex) {
     this.buildShell()
     this.cases = await this.catalog.getCases()
-    let idx = Number(caseIndex)
+    let idx = (caseIndex === undefined || caseIndex === null || caseIndex === "") ? NaN : Number(caseIndex)
     if (!Number.isInteger(idx) || idx < 0 || idx >= this.cases.files.length) {
       idx = Math.floor(Math.random() * this.cases.files.length)
     }
@@ -34,18 +34,17 @@ export class VraiUfo {
     root.innerHTML = `
       <div class="frame">
         <div class="folder">
-          <div class="folder__top">
-            <div class="ref">${ui.archives}<br><span class="ref__no">${ui.fileLabel} <span data-ref="caseNo"></span></span></div>
-            <div class="stamp stamp--red">${ui.unclassified}</div>
-          </div>
-          <div class="kicker kicker--eval">${ui.evalKicker}</div>
+          <div class="kicker kicker--eval">${ui.archives}</div>
           <h1 class="title"><span class="t-true">${ui.tTrue}</span> <span class="t-or">${ui.tOr}</span> <span class="t-false">${ui.tFalse}</span> <span class="t-ufo">${ui.ufoWord} ?</span></h1>
           <p class="intro">${ui.intro}</p>
           <div class="divider"></div>
           <div class="loading" data-ref="loading">${ui.loading}</div>
           <div class="case" data-ref="case" hidden>
-            <div class="kicker">${ui.caseKicker}</div>
-            <h2 class="name" data-ref="name"></h2>
+            <div class="kicker" data-ref="caseHeading"></div>
+            <div class="name-row">
+              <h2 class="name" data-ref="name"></h2>
+              <div class="stamp stamp--pre" data-ref="stamp">${ui.unclassified}</div>
+            </div>
             <div class="meta" data-ref="meta"></div>
             <div class="photo">
               <span class="tape tape--l"></span><span class="tape tape--r"></span>
@@ -56,7 +55,6 @@ export class VraiUfo {
               <button class="pick-false" data-ref="falseBtn">${ui.tFalse} ${ui.ufoWord}</button>
             </div>
             <div class="verdict" data-ref="verdict" hidden>
-              <div class="verdict__stamp" data-ref="verdictStamp"></div>
               <p class="conclusion" data-ref="conclusion"></p>
               <a class="case-link" data-ref="caseLink" target="_blank" rel="noopener"></a>
               <button class="another" data-ref="another">${this.messages.question.pick}</button>
@@ -98,7 +96,13 @@ export class VraiUfo {
   render(pickedCase) {
     this.el.verdict.hidden = true
     this.el.options.hidden = false
-    this.el.caseNo.textContent = "#" + String(this.currentIndex).padStart(4, "0")
+    const caseNo = "#" + String(this.currentIndex).padStart(4, "0")
+    this.el.caseHeading.textContent = this.ui.caseKicker.replace("{n}", caseNo)
+
+    const stamp = this.el.stamp
+    stamp.textContent = this.ui.unclassified
+    stamp.className = "stamp stamp--pre"
+    stamp.style.animation = ""
 
     let imageHref = pickedCase.image
     let classifTitle = null
@@ -174,16 +178,17 @@ export class VraiUfo {
     this.el.options.hidden = true
     this.el.verdict.hidden = false
 
-    const stamp = this.el.verdictStamp
-    stamp.textContent = correct ? this.messages.answer.correct : this.messages.answer.incorrect
-    stamp.classList.toggle("is-true", correct)
-    stamp.classList.toggle("is-false", !correct)
+    const genuine = conclusion === "unknown"
+    const stamp = this.el.stamp
+    stamp.textContent = this.ui.stampLabel[conclusion] || this.ui.stampLabel.unknown
+    stamp.className = "stamp stamp--done " + (genuine ? "is-true" : "is-false")
     stamp.style.animation = "none"
     void stamp.offsetWidth
     stamp.style.animation = ""
 
     const answerMessages = this.messages.answer
-    this.el.conclusion.textContent = answerMessages.conclusion[conclusion]
+    const word = correct ? answerMessages.correct : answerMessages.incorrect
+    this.el.conclusion.innerHTML = `<b class="verdict-word ${correct ? "is-true" : "is-false"}">${word}</b> ${answerMessages.conclusion[conclusion]}`
     this.el.caseLink.href = this.pickedCase.url
     this.el.caseLink.textContent = this.ui.caseLink
 

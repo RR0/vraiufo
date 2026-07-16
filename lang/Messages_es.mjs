@@ -56,12 +56,13 @@ const messages_es = {
     tFalse: "FALSO",
     ufoWord: "ovni",
     intro: "¿Engaño, confusión… o un caso aún sin identificar? Tú decides.",
-    caseKicker: "Caso bajo revisión",
+    caseKicker: "Expediente {n} bajo revisión",
     loading: "Abriendo el expediente…",
     noVisual: "PRUEBA — sin imagen",
     accuracy: "Precisión",
     streakLabel: "RACHA",
     caseLink: "Ver el expediente en RR0 →",
+    stampLabel: {hoax: "Engaño", misinterpretation: "Confusión", unknown: "No identificado"},
     tagline: "archivos de observaciones"
   }
 }

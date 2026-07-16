@@ -56,12 +56,13 @@ const messages_sv = {
     tFalse: "FALSK",
     ufoWord: "ufo",
     intro: "Bluff, förväxling… eller ett ännu oidentifierat fall? Du bestämmer.",
-    caseKicker: "Fall under granskning",
+    caseKicker: "Akt {n} under granskning",
     loading: "Öppnar akten…",
     noVisual: "BEVIS — utan bild",
     accuracy: "Precision",
     streakLabel: "SVIT",
     caseLink: "Se fallet på RR0 →",
+    stampLabel: {hoax: "Bluff", misinterpretation: "Förväxling", unknown: "Oidentifierat"},
     tagline: "observationsarkiv"
   }
 }

@@ -56,12 +56,13 @@ const messages_no = {
     tFalse: "FALSK",
     ufoWord: "ufo",
     intro: "Bløff, forveksling… eller en fortsatt uidentifisert sak? Du bestemmer.",
-    caseKicker: "Sak til vurdering",
+    caseKicker: "Sak {n} til vurdering",
     loading: "Åpner saken…",
     noVisual: "BEVIS — uten bilde",
     accuracy: "Nøyaktighet",
     streakLabel: "SERIE",
     caseLink: "Se saken på RR0 →",
+    stampLabel: {hoax: "Bløff", misinterpretation: "Forveksling", unknown: "Uidentifisert"},
     tagline: "observasjonsarkiv"
   }
 }

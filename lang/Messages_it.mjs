@@ -56,12 +56,13 @@ const messages_it = {
     tFalse: "FALSO",
     ufoWord: "ufo",
     intro: "Bufala, errore… o un caso ancora non identificato? Decidi tu.",
-    caseKicker: "Caso in esame",
+    caseKicker: "Fascicolo {n} in esame",
     loading: "Apertura del fascicolo…",
     noVisual: "REPERTO — senza immagine",
     accuracy: "Precisione",
     streakLabel: "SERIE",
     caseLink: "Vedi il fascicolo su RR0 →",
+    stampLabel: {hoax: "Bufala", misinterpretation: "Errore", unknown: "Non identificato"},
     tagline: "archivi di osservazioni"
   }
 }
